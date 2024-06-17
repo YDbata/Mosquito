@@ -188,7 +188,7 @@ Transform:
   m_GameObject: {fileID: 19514550}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.262, y: 0.21, z: 13.098001}
+  m_LocalPosition: {x: 10.262, y: 0.23293011, z: 13.098001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -879,7 +879,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.262, y: 0.21, z: 13.098001}
+  m_LocalPosition: {x: 10.262, y: 0.23293011, z: 13.098001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -996,6 +996,7 @@ GameObject:
   - component: {fileID: 1090991320}
   - component: {fileID: 1090991319}
   - component: {fileID: 1090991321}
+  - component: {fileID: 1090991322}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1017,9 +1018,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mosquito: {fileID: 1090991318}
   animator: {fileID: 2025510472112978486}
-  speed: 0.3
-  fastSpeed: 0.6
-  rotationspeed: 0.5
+  speed: 0.4
+  fastSpeed: 0.8
+  rotationspeed: 0.2
+  accrotation: 0.5
   AttackCoolDown: 2
 --- !u!4 &1090991320
 Transform:
@@ -1064,6 +1066,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!136 &1090991322
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090991318}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.0063201315
+  m_Height: 0.012640263
+  m_Direction: 0
+  m_Center: {x: 0.0006610281, y: -0.0014368468, z: -0.0011568074}
 --- !u!1001 &1181088941
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1430,18 +1455,18 @@ MonoBehaviour:
   m_LookaheadSmoothing: 0
   m_LookaheadIgnoreY: 0
   m_XDamping: 0
-  m_YDamping: 0
+  m_YDamping: 0.2
   m_ZDamping: 0
   m_TargetMovementOnly: 1
   m_ScreenX: 0.5
-  m_ScreenY: 0.5
+  m_ScreenY: 0.71
   m_CameraDistance: 0.15
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
-  m_SoftZoneWidth: 0.17
-  m_SoftZoneHeight: 0.12
+  m_SoftZoneWidth: 0.15
+  m_SoftZoneHeight: 0.17
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1

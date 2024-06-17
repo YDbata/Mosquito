@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine.Utility;
+using Mosquito.Stat;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -17,10 +18,18 @@ public class MosquitoController : MonoBehaviour
     [SerializeField] private float speed = 5f;
     [SerializeField] private float fastSpeed = 5f;
     [SerializeField]private float rotationspeed = 1f;
+    [SerializeField] private float accrotation = 0.5f;
 
     [Header("Attack")]
     [SerializeField] private float AttackCoolDown = 2f;
 
+    [Header("Stat")] [SerializeField] StatID Hp;
+    [SerializeField] private StatID Stamina;
+    [SerializeField] private StatID Speed;
+    
+    private Stat _hp;
+    private Stat _stamina;
+    private Stat _speed;
     public bool lockMove
     {
         get { return animator.GetBool(AnimationStrings.LockMove); }
@@ -35,7 +44,9 @@ public class MosquitoController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        
+        _hp = new Stat();
+        _hp.id = Hp;
+        _hp.value = Hp.initValue;
     }
 
     // Update is called once per frame
@@ -56,9 +67,9 @@ public class MosquitoController : MonoBehaviour
         float dy = target.y - transform.position.y;
         float dx = target.x - transform.position.x;
         float dz = target.z - transform.position.z;
+        float Rdirection = viewportPoint.x - 0.5f;
         
-        mosquitoRotation = Quaternion.Euler((Vector3.left * (viewportPoint.y - 0.5f)*180) 
-                                            + (Vector3.up*(viewportPoint.x-0.5f)*rotationspeed + new Vector3(0, transform.eulerAngles.y, 0)));
+        
         //transform.rotation *= Quaternion.Euler(Vector3.up*(viewportPoint.x-0.5f)*90*rotationspeed);
         
         // 위아리좌우 이동 구현
@@ -72,6 +83,21 @@ public class MosquitoController : MonoBehaviour
         {
             velocity = new Vector3(0, 0, 0);
         }
+        
+        // 좌우 구현(가속)
+        if (Input.GetKey(KeyCode.A))
+        {
+            Rdirection -= accrotation;
+        }
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            Rdirection += accrotation;
+        }
+        
+        mosquitoRotation = Quaternion.Euler((Vector3.left * (viewportPoint.y - 0.5f)*180) 
+                                            + (Vector3.up*(Rdirection)*rotationspeed + new Vector3(0, transform.eulerAngles.y, 0)));
+        
         if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
         {
             velocity *= fastSpeed;
