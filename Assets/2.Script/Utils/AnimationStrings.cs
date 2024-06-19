@@ -8,5 +8,6 @@ public class AnimationStrings
     public static string SAttack = "SAttack";
     public static string LockMove = "LockMove";
     public static string CanMove = "CanMove";
+    public static string IsSit = "IsSit";
     
 }

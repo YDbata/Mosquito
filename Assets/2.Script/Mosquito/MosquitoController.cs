@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine.Utility;
@@ -19,6 +20,8 @@ public class MosquitoController : MonoBehaviour
     [SerializeField] private float fastSpeed = 5f;
     [SerializeField]private float rotationspeed = 1f;
     [SerializeField] private float accrotation = 0.5f;
+    [SerializeField] private float nockback = 1f;
+    [SerializeField] private float nockbackSpeed = 1f;
 
     [Header("Attack")]
     [SerializeField] private float AttackCoolDown = 2f;
@@ -126,5 +129,10 @@ public class MosquitoController : MonoBehaviour
             
             rb.velocity = velocity;
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        transform.position = Vector3.Slerp(transform.position, transform.position - (transform.forward*nockback), 0.001f);
     }
 }
