@@ -9,7 +9,7 @@ namespace Mosquito.Stat
 {
     public class Stat
     {
-        public StatID id;
+        public StatDataModel type;
 
         public float value
         {

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Mosquito.Stat;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Mosquito.Stat
 {
@@ -17,7 +18,7 @@ namespace Mosquito.Stat
     [Serializable]
     public class StatModifier
     {
-        public StatID statID;
+        [FormerlySerializedAs("StatType")] public StatType statDataModel;
         public StatModType modType;
         public int value;
     }

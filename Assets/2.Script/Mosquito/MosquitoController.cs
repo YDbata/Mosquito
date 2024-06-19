@@ -15,7 +15,7 @@ public class MosquitoController : MonoBehaviour
     
     [Header("Move")]
     [SerializeField] Animator animator;
-    [SerializeField] private float speed = 5f;
+    
     [SerializeField] private float fastSpeed = 5f;
     [SerializeField]private float rotationspeed = 1f;
     [SerializeField] private float accrotation = 0.5f;
@@ -23,13 +23,13 @@ public class MosquitoController : MonoBehaviour
     [Header("Attack")]
     [SerializeField] private float AttackCoolDown = 2f;
 
-    [Header("Stat")] [SerializeField] StatID Hp;
-    [SerializeField] private StatID Stamina;
-    [SerializeField] private StatID Speed;
+    [Header("Stat")] public InGameObjectSpecification stat;
     
-    private Stat _hp;
-    private Stat _stamina;
-    private Stat _speed;
+    private float speed = 5f;
+    float hp;
+    private float stamina;
+    
+
     public bool lockMove
     {
         get { return animator.GetBool(AnimationStrings.LockMove); }
@@ -44,9 +44,9 @@ public class MosquitoController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        _hp = new Stat();
-        _hp.id = Hp;
-        _hp.value = Hp.initValue;
+        hp = stat[StatType.hp];
+        stamina = stat[StatType.stamina];
+        speed = stat[StatType.speed];
     }
 
     // Update is called once per frame
