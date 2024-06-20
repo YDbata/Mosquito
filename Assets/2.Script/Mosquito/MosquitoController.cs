@@ -133,6 +133,6 @@ public class MosquitoController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        transform.position = Vector3.Slerp(transform.position, transform.position - (transform.forward*nockback), 0.001f);
+        transform.position = Vector3.Lerp(transform.position, transform.position - (transform.forward*nockback), Time.deltaTime);
     }
 }
