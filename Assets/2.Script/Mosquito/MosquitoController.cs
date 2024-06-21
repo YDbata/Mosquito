@@ -3,10 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using Cinemachine.Utility;
 using Mosquito.Stat;
+using Mosquito.Utils;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Cursor = UnityEngine.Cursor;
 
 public class MosquitoController : MonoBehaviour
 {
@@ -24,16 +26,15 @@ public class MosquitoController : MonoBehaviour
     [SerializeField] private float knockbackSpeed = 5f;
     [SerializeField] private float restPointDistance = 0.4f;
 
-    [Header("Canvas")] [SerializeField] private Canvas RestCanvas;
-
     [Header("Attack")]
     [SerializeField] private float AttackCoolDown = 2f;
 
     [Header("Stat")] public InGameObjectSpecification stat;
-    
+
     private float speed = 5f;
     float hp;
     private float stamina;
+    private bool IsRest = false;
     
 
     public bool lockMove
@@ -44,12 +45,24 @@ public class MosquitoController : MonoBehaviour
             animator.SetBool(AnimationStrings.LockMove, value);
         }
     }
+
+    public bool isRest
+    {
+        get { return animator.GetBool(AnimationStrings.IsRest); }
+        set
+        {
+            IsRest = value;
+            animator.SetBool(AnimationStrings.IsRest, value);
+        }
+    }
     
+    private MouseController mouseController;
     private Rigidbody rb;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        mouseController = GetComponent<MouseController>();
         hp = stat[StatType.hp];
         stamina = stat[StatType.stamina];
         speed = stat[StatType.speed];
@@ -135,26 +148,46 @@ public class MosquitoController : MonoBehaviour
         
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
+        if (!isRest)
         {
-            if (Vector3.Distance(transform.position, hit.point) < restPointDistance)
+            
+            if (Physics.Raycast(ray, out hit))
             {
-                
-                RestCanvas.transform.position = hit.point;
-                RestCanvas.enabled = true;
-                if (Input.GetKey(KeyCode.F))
+                if (Vector3.Distance(transform.position, hit.point) < restPointDistance)
                 {
-                    Debug.Log(hit.transform.name+" "+ Vector3.Distance(transform.position, hit.point));
+                    mouseController.SetCursor(CursorType.Rest);
                 }
-            }
-            else
-            {
-                RestCanvas.enabled = false;
+                else
+                {
+                    mouseController.SetCursor(CursorType.None);
+                }
+                Debug.Log(hit.transform.name+" "+ Vector3.Distance(transform.position, hit.point));
+                
+
             }
         }
         else
         {
-            RestCanvas.enabled = false;
+            mouseController.SetCursor(CursorType.None);
+        }
+        
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            
+            if (!isRest)
+            {
+
+                if (mouseController.currentCursorType == CursorType.Rest)
+                {
+                    mouseController.SetCursor(CursorType.None);
+                    isRest = true;
+                }
+            }
+            else
+            {
+                mouseController.SetCursor(CursorType.None);
+                isRest = false;
+            }
         }
         
     }
