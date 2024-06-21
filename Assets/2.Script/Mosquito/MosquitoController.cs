@@ -20,8 +20,11 @@ public class MosquitoController : MonoBehaviour
     [SerializeField] private float fastSpeed = 5f;
     [SerializeField]private float rotationspeed = 1f;
     [SerializeField] private float accrotation = 0.5f;
-    [SerializeField] private float nockback = 1f;
-    [SerializeField] private float nockbackSpeed = 1f;
+    [SerializeField] private float knockback = 2f;
+    [SerializeField] private float knockbackSpeed = 5f;
+    [SerializeField] private float restPointDistance = 0.4f;
+
+    [Header("Canvas")] [SerializeField] private Canvas RestCanvas;
 
     [Header("Attack")]
     [SerializeField] private float AttackCoolDown = 2f;
@@ -129,10 +132,35 @@ public class MosquitoController : MonoBehaviour
             
             rb.velocity = velocity;
         }
+        
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            if (Vector3.Distance(transform.position, hit.point) < restPointDistance)
+            {
+                
+                RestCanvas.transform.position = hit.point;
+                RestCanvas.enabled = true;
+                if (Input.GetKey(KeyCode.F))
+                {
+                    Debug.Log(hit.transform.name+" "+ Vector3.Distance(transform.position, hit.point));
+                }
+            }
+            else
+            {
+                RestCanvas.enabled = false;
+            }
+        }
+        else
+        {
+            RestCanvas.enabled = false;
+        }
+        
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        transform.position = Vector3.Lerp(transform.position, transform.position - (transform.forward*nockback), Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, transform.position - (transform.forward*knockback), knockbackSpeed*Time.deltaTime);
     }
 }
