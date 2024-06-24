@@ -106,15 +106,15 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 3
     agentTypeID: 0
-    agentRadius: 0.5
+    agentRadius: 0.1
     agentHeight: 2
-    agentSlope: 45
-    agentClimb: 0.4
+    agentSlope: 6.3
+    agentClimb: 0.3
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.16666667
+    cellSize: 0.033333335
     manualTileSize: 0
     tileSize: 256
     buildHeightMesh: 0
@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: a9c505fb5473b4652af5572f79a64fd6, type: 2}
 --- !u!1 &19514550
 GameObject:
   m_ObjectHideFlags: 0
@@ -1376,6 +1376,7 @@ GameObject:
   - component: {fileID: 1571000270}
   - component: {fileID: 1571000271}
   - component: {fileID: 1571000272}
+  - component: {fileID: 1571000273}
   m_Layer: 0
   m_Name: Human
   m_TagString: Untagged
@@ -1438,10 +1439,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 949665fc85bb4b798590ff99c1d2de2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sittingPoint: {fileID: 1568143748}
-  animator: {fileID: 5866666021815895808}
-  hips: {fileID: 1148177521}
-  sitheight: 0.4
+  state: 0
+  _slopeAngle: 45
+  _step: 0.2
+  _groundMask:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!195 &1571000273
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571000269}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &1613075880
 GameObject:
   m_ObjectHideFlags: 0
