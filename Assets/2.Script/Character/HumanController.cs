@@ -1,9 +1,15 @@
+using System;
+using Mosquito.AI;
+using UnityEditor.Experimental.GraphView;
+using UnityEditor.UIElements;
 using UnityEngine;
+using Tree = Mosquito.AI.Tree;
 
 namespace Mosquito.Character
 {
     public class HumanController : CharacterController
     {
+        private Tree tree;
         [SerializeField] Transform sittingPoint;
         [SerializeField] private Animator animator;
         [SerializeField] private Transform hips;
@@ -19,7 +25,15 @@ namespace Mosquito.Character
                 //hips.position = sittingPoint.position;
             }
         }
-        
+
+        [Header("AI")] [SerializeField] private LayerMask targetMask;
+
+        private void Start()
+        {
+            tree = gameObject.AddComponent<Tree>();
+            tree.StartBuild().Selector().Sequence().Detection(5, 90, targetMask);
+        }
+
         private void Update()
         {
             if (_isSit)

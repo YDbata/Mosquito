@@ -146,20 +146,7 @@ namespace Mosquito.Character
 
         protected virtual void Update()
         {
-            if (IsOwner)
-            {
-                if (IsGrounded())
-                    velocity = new Vector3(horizontal, 0.0f, vertical).normalized * moveGain;
-
-                if (_aiOn)
-                {
-                    horizontal = Vector3.Dot(transform.right, _agent.velocity);
-                    vertical = Vector3.Dot(transform.forward, _agent.velocity);
-                }
-            }
-
-            _animator.SetFloat("h", horizontal * moveGain);
-            _animator.SetFloat("v", vertical * moveGain);
+            Debug.Log("CharaterController");
         }
 
         private void FixedUpdate()

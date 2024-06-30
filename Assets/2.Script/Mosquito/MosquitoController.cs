@@ -148,10 +148,10 @@ public class MosquitoController : MonoBehaviour
         
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
+        
         if (!isRest)
         {
-            
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit) && hit.transform.gameObject.layer != 7)
             {
                 if (Vector3.Distance(transform.position, hit.point) < restPointDistance)
                 {
@@ -161,7 +161,7 @@ public class MosquitoController : MonoBehaviour
                 {
                     mouseController.SetCursor(CursorType.None);
                 }
-                Debug.Log(hit.transform.name+" "+ Vector3.Distance(transform.position, hit.point));
+                //Debug.Log(hit.transform.name+" "+ hit.rigidbody.gameObject.layer);
                 
 
             }
