@@ -21,5 +21,8 @@ graph TD;
   Sequence3 --> DetectEnemy;
   Sequence3 --> IsAttackRange3;
   Sequence3 --> Attack3;
-  Selector --> BasicMotion;
+  Selector --> Sequence4;
+  Sequence4 --> Invertor;
+  Sequence4 --> BasicMotion;
+  Invertor --> Detection;
 ```
