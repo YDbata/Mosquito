@@ -5,12 +5,6 @@ using UnityEngine;
 
 namespace Mosquito.AI
 {
-    public enum DetectionType
-    {
-        Eye,
-        Ear,
-        Hit
-    }
     
     public class Tree : MonoBehaviour
     {
@@ -35,7 +29,6 @@ namespace Mosquito.AI
         {
             stack.Clear();
             stack.Push(root);
-
             while (stack.Count > 0)
             {
                 Node current = stack.Pop();
@@ -52,7 +45,7 @@ namespace Mosquito.AI
         }
 
         
-
+        #region Build
         public Tree StartBuild()
         {
             blackboard = new Blackboard(this);
@@ -77,10 +70,10 @@ namespace Mosquito.AI
                 throw new System.Exception($"[Tree] : {parent.GetType()} has no child");
             }
         }
-        #region Build
+        
         #endregion
 
-        #region Composite
+        #region Composite&Deco
 
         public Tree Selector()
         {
@@ -127,11 +120,15 @@ namespace Mosquito.AI
         {
             Node detection = new DetectionObject(this, radius, angle, targetMask);
             Attach(_current, detection);
+            _current = _composites.Count > 0 ? _composites.Peek() : null;
             return this;
         }
 
-        public Tree IsRangeAttack(int radius)
+        public Tree IsAttackRange(float radius)
         {
+            Node isAttack = new IsAttackRange(this, radius);
+            Attach(_current, isAttack);
+            _current = _composites.Count > 0 ? _composites.Peek() : null;
             return this;
         }
 

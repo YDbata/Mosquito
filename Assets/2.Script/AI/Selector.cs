@@ -5,7 +5,6 @@ namespace Mosquito.AI
 {
     public class Selector : Composite
     {
-        List<Node> children { get; set; }
         public Selector(Tree tree) : base(tree)
         {
         }

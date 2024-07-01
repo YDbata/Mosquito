@@ -5,7 +5,6 @@ namespace Mosquito.AI
 {
     public class Sequence : Composite
     {
-        List<Node> children { get; set; }
 
         public Sequence(Tree tree) : base(tree)
         {

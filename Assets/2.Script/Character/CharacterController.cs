@@ -146,7 +146,7 @@ namespace Mosquito.Character
 
         protected virtual void Update()
         {
-            Debug.Log("CharaterController");
+            //Debug.Log("CharaterController");
         }
 
         private void FixedUpdate()
