@@ -48,7 +48,8 @@ namespace Mosquito.AI
                 if (Physics.Raycast(origin+new Vector3(0, target.y, 0),
                         lookDir,
                         out RaycastHit hit,
-                        Vector3.Distance(target, origin),
+                        Vector2.Distance(new Vector2(target.x, target.z), new Vector2(origin.x, origin.z)),
+                        //sssVector3.Distance(target, origin),
                         targetMask))
                 {
                     return true;

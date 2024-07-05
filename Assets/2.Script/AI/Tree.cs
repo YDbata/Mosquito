@@ -132,8 +132,11 @@ namespace Mosquito.AI
             return this;
         }
 
-        public Tree Seek()
+        public Tree Seek(float distanceLimit, Animator animator)
         {
+            Node seek = new Seek(this, distanceLimit, animator);
+            Attach(_current, seek);
+            _current = _composites.Count > 0 ? _composites.Peek() : null;
             return this;
         }
 

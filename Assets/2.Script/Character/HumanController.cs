@@ -34,7 +34,8 @@ namespace Mosquito.Character
         private void Start()
         {
             tree = gameObject.AddComponent<Tree>();
-            tree.StartBuild().Selector().Sequence().Detection(radius, angle, targetMask).IsAttackRange(attackRadius);
+            tree.StartBuild().Selector().Sequence().
+                Detection(radius, angle, targetMask).Seek(1, animator);
         }
 
         // override void Update()
