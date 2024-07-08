@@ -118,7 +118,7 @@ namespace Mosquito.AI
 
         public Tree Detection(float radius, float angle, LayerMask targetMask)
         {
-            Node detection = new DetectionObject(this, radius, angle, targetMask);
+            Node detection = new EyeDetectionObject(this, radius, angle, targetMask);
             Attach(_current, detection);
             _current = _composites.Count > 0 ? _composites.Peek() : null;
             return this;

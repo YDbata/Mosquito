@@ -147,6 +147,7 @@ namespace Mosquito.Character
         protected virtual void Update()
         {
             //Debug.Log("CharaterController");
+            //transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         }
 
         private void FixedUpdate()

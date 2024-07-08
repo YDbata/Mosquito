@@ -30,12 +30,13 @@ namespace Mosquito.Character
         [SerializeField] private float angle = 120f;
         [SerializeField] private LayerMask targetMask;
         [SerializeField] private float attackRadius = 0.7f;
+        [SerializeField] private float seekDistanceLimit = 1.5f;
 
         private void Start()
         {
             tree = gameObject.AddComponent<Tree>();
             tree.StartBuild().Selector().Sequence().
-                Detection(radius, angle, targetMask).Seek(1, animator);
+                Detection(radius, angle, targetMask).Seek(seekDistanceLimit, animator);
         }
 
         // override void Update()

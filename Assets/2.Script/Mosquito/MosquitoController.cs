@@ -102,20 +102,25 @@ public class MosquitoController : MonoBehaviour
         {
             velocity = new Vector3(0, 0, 0);
         }
+        mosquitoRotation = Quaternion.Euler((Vector3.left * (viewportPoint.y - 0.5f)*180) + new Vector3(0, transform.eulerAngles.y, 0));
         
         // 좌우 구현(가속)
         if (Input.GetKey(KeyCode.A))
         {
             Rdirection -= accrotation;
+            velocity = direction;
+            mosquitoRotation = Quaternion.Euler((Vector3.left * (viewportPoint.y - 0.5f)*180) 
+                                                + (Vector3.up*(Rdirection)*rotationspeed + new Vector3(0, transform.eulerAngles.y, 0)));
         }
 
         if (Input.GetKey(KeyCode.D))
         {
             Rdirection += accrotation;
+            velocity = direction;
+            mosquitoRotation = Quaternion.Euler((Vector3.left * (viewportPoint.y - 0.5f)*180) 
+                                                + (Vector3.up*(Rdirection)*rotationspeed + new Vector3(0, transform.eulerAngles.y, 0)));
         }
         
-        mosquitoRotation = Quaternion.Euler((Vector3.left * (viewportPoint.y - 0.5f)*180) 
-                                            + (Vector3.up*(Rdirection)*rotationspeed + new Vector3(0, transform.eulerAngles.y, 0)));
         
         if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
         {

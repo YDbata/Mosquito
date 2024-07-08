@@ -16,9 +16,19 @@ namespace Mosquito.AI
 
         public override Result Invoke()
         {
+            float distance_target = Vector2.Distance(
+                new Vector2(blackboard.target.position.x, blackboard.target.position.z),
+                new Vector2(blackboard.transform.position.x, blackboard.transform.position.z));
+            if (blackboard.agent.stoppingDistance >= distance_target)
+            {
+                //blackboard.transform.LookAt(blackboard.target);
+                _animator.SetInteger("State", 1);
+                Debug.Log("Success");
+                return Result.Success;
+            }
+            
             if (blackboard.target &&
-                Vector2.Distance(new Vector2(blackboard.target.position.x, blackboard.target.position.z), 
-                    new Vector2(blackboard.transform.position.x, blackboard.transform.position.z)) <= _distanceLimit) //Vector3.Distance(blackboard.transform.position, blackboard.target.position)
+                 distance_target <= _distanceLimit) //Vector3.Distance(blackboard.transform.position, blackboard.target.position)
             {
                 if (NavMesh.SamplePosition(blackboard.target.position, 
                         out NavMeshHit hit,
@@ -34,6 +44,7 @@ namespace Mosquito.AI
 
             blackboard.target = null;
             blackboard.agent.isStopped = true;
+            _animator.SetInteger("State", 1);
             return Result.Failure;
         }
     }

@@ -12,7 +12,10 @@ namespace Mosquito.AI
 
         public override Result Invoke()
         {
-            if (Vector3.Distance(blackboard.target.position, blackboard.transform.position) <= radius)
+            float distance_target = Vector2.Distance(
+                new Vector2(blackboard.target.position.x, blackboard.target.position.z),
+                new Vector2(blackboard.transform.position.x, blackboard.transform.position.z));
+            if (distance_target <= radius)
             {
                 return Result.Success;
             }

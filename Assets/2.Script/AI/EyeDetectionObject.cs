@@ -2,14 +2,14 @@ using UnityEngine;
 
 namespace Mosquito.AI
 {
-    public class DetectionObject : Node
+    public class EyeDetectionObject : Node
     {
         private float radius;
         private float angle;
         private LayerMask targetMask;
         
         
-        public DetectionObject(Tree tree, float radius, float angle, LayerMask targetMask) : base(tree)
+        public EyeDetectionObject(Tree tree, float radius, float angle, LayerMask targetMask) : base(tree)
         {
             this.radius = radius;
             this.angle = angle;
