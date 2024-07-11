@@ -13,9 +13,13 @@ namespace Mosquito.AI
         public Transform transform;
         public NavMeshAgent agent;
         public CharacterController controller;
+        public Animator animator;
         
-        // target : 트리안에서 판단을 위해 접근하는 주체
+        // target : 트리 안에서 판단을 위해 접근하는 주체
         public Transform target;
+        
+        // 공격 가능한지 확인
+        public bool isAttack = false;
         
         public Blackboard(Tree tree)
         {
@@ -23,6 +27,8 @@ namespace Mosquito.AI
             this.transform = tree.GetComponent<Transform>();
             this.agent = tree.GetComponent<NavMeshAgent>();
             this.controller = tree.GetComponent<CharacterController>();
+            this.animator = tree.GetComponent<Animator>();
+            this.target = null;
         }
     }
 }

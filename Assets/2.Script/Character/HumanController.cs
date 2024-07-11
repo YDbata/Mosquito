@@ -35,8 +35,13 @@ namespace Mosquito.Character
         private void Start()
         {
             tree = gameObject.AddComponent<Tree>();
-            tree.StartBuild().Selector().Sequence().
-                Detection(radius, angle, targetMask).Seek(seekDistanceLimit, animator);
+            tree.StartBuild().Selector().Sequence().IsAttackRange(attackRadius)
+                .Attack();
+            ((Selector)tree.root.child).children.Add(new Sequence(tree));
+            ((Sequence)((Selector)tree.root.child).children[1])
+                .children.Add(new EyeDetectionObject(tree, radius, angle, targetMask));
+            ((Sequence)((Selector)tree.root.child).children[1])
+                .children.Add(new Seek(tree, seekDistanceLimit, animator));
         }
 
         // override void Update()

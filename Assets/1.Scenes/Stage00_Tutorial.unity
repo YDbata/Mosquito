@@ -108,8 +108,8 @@ NavMeshSettings:
     agentTypeID: 0
     agentRadius: 0.1
     agentHeight: 2
-    agentSlope: 6.3
-    agentClimb: 0.3
+    agentSlope: 10.5
+    agentClimb: 1
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: a9c505fb5473b4652af5572f79a64fd6, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 98994e907d8d54e8b9c5f14ffe68500d, type: 2}
 --- !u!1 &41503479 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1568983460347631277, guid: e0f4fb8c42514d64986a26fff32797f1, type: 3}
@@ -1810,7 +1810,7 @@ Transform:
   m_GameObject: {fileID: 665033054}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 10.885003, y: 0.91337305, z: 13.234003}
+  m_LocalPosition: {x: 9.168003, y: 0.91337305, z: 12.304003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2750,7 +2750,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 10.885003, y: 0.91337305, z: 13.234003}
+  m_LocalPosition: {x: 9.168003, y: 0.91337305, z: 12.304003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2981,7 +2981,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1090991319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3013,7 +3013,7 @@ Transform:
   m_GameObject: {fileID: 1090991318}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 11.035, y: 0.877, z: 13.234}
+  m_LocalPosition: {x: 9.318, y: 0.877, z: 12.304}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4306,7 +4306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70b342d8ce5c2fd48b8fa3147d48d1d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Weight: 1
+  m_Weight: 0
   m_Effectors:
   - m_Transform: {fileID: 0}
     m_Style:
@@ -4529,7 +4529,7 @@ MonoBehaviour:
     m_SourceObjects:
       m_Length: 1
       m_Item0:
-        transform: {fileID: 161525622}
+        transform: {fileID: 1090991320}
         weight: 1
       m_Item1:
         transform: {fileID: 0}
@@ -6246,13 +6246,13 @@ MonoBehaviour:
   animator: {fileID: 1866880410}
   hips: {fileID: 1971910049}
   sitheight: 0
-  radius: 1.5
+  radius: 1.7
   angle: 150
   targetMask:
     serializedVersion: 2
     m_Bits: 64
   attackRadius: 0.6
-  seekDistanceLimit: 1
+  seekDistanceLimit: 1.2
 --- !u!114 &1866880407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6309,8 +6309,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1866880404}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 9.354, y: 0, z: 12.807}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -6324,7 +6324,7 @@ Transform:
   - {fileID: 1369976560}
   - {fileID: 1793627594}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!95 &1866880410
 Animator:
   serializedVersion: 5
@@ -6341,11 +6341,7 @@ Animator:
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'mixamorig:Head'\n\tTransform 'mixamorig:Neck'\n\tTransform
-    'mixamorig:Head'\n\tTransform 'mixamorig:Neck'\n\tTransform 'mixamorig:Head'\n\tTransform
-    'mixamorig:Neck'"
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -12935,6 +12931,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Blanket
       objectReference: {fileID: 0}
+    - target: {fileID: 2864709115251151038, guid: 04be1f26fe0071745a175894741775f5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15313,6 +15313,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chair
       objectReference: {fileID: 0}
+    - target: {fileID: 2102705767522387694, guid: 2988c8d3c3cc55044ac3589483ce8215, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3131433415417574653, guid: 2988c8d3c3cc55044ac3589483ce8215, type: 3}
       propertyPath: m_RootOrder
       value: 30
@@ -15911,7 +15915,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 311978698074431878, guid: 34add70c18692924bae5d49c7487cbff, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3607109669084058517, guid: 34add70c18692924bae5d49c7487cbff, type: 3}
       propertyPath: m_RootOrder
@@ -15998,7 +16002,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 810430194285209325, guid: b2199e90a5a17e4458cfd76c79e3f32b, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4423766489669571838, guid: b2199e90a5a17e4458cfd76c79e3f32b, type: 3}
       propertyPath: m_RootOrder

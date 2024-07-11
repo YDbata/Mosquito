@@ -1,3 +1,5 @@
+using System;
+using Mosquito.Character;
 using UnityEngine;
 
 namespace Mosquito.AI
@@ -10,7 +12,18 @@ namespace Mosquito.AI
 
         public override Result Invoke()
         {
-            throw new System.NotImplementedException();
+            Debug.Log("Attack Node Invoke "+ blackboard.isAttack);
+            if (blackboard.isAttack)
+            {
+                blackboard.animator.SetTrigger("Attack");
+                blackboard.isAttack = false;
+                return Result.Success;
+            }
+            else
+            {
+                //blackboard.animator.SetInteger("State", 0);
+                return Result.Failure;
+            }
         }
     }
 }

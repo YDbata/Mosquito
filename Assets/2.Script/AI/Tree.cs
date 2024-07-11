@@ -142,6 +142,9 @@ namespace Mosquito.AI
 
         public Tree Attack()
         {
+            Node attack = new Attack(this);
+            Attach(_current, attack);
+            _current = _composites.Count > 0 ? _composites.Peek() : null;
             return this;
         }
 
