@@ -20,6 +20,6 @@ namespace Mosquito.Stat
     {
         [FormerlySerializedAs("StatType")] public StatType statDataModel;
         public StatModType modType;
-        public int value;
+        public float value;
     }
 }

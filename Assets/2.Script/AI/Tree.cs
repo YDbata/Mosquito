@@ -124,9 +124,9 @@ namespace Mosquito.AI
             return this;
         }
 
-        public Tree IsAttackRange(float radius)
+        public Tree IsAttackRange(float radius, float angle, LayerMask targetMask)
         {
-            Node isAttack = new IsAttackRange(this, radius);
+            Node isAttack = new IsAttackRange(this, radius, angle, targetMask);
             Attach(_current, isAttack);
             _current = _composites.Count > 0 ? _composites.Peek() : null;
             return this;

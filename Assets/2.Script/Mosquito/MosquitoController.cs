@@ -2,11 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine.Utility;
+using Mosquito.CommonSystem;
 using Mosquito.Stat;
 using Mosquito.Utils;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UIElements;
 using Cursor = UnityEngine.Cursor;
 
@@ -26,16 +28,30 @@ public class MosquitoController : MonoBehaviour
     [SerializeField] private float knockbackSpeed = 5f;
     [SerializeField] private float restPointDistance = 0.4f;
 
-    [Header("Attack")]
+    [Header("Attack&Hit")]
     [SerializeField] private float AttackCoolDown = 2f;
 
     [Header("Stat")] public InGameObjectSpecification stat;
 
     private float speed = 5f;
-    float hp;
+    public HP Hp;
     private float stamina;
     private bool IsRest = false;
+
     
+    
+    [SerializeField] private bool isAlive = true;
+
+    public bool IsAlive
+    {
+        get { return isAlive; }
+        set
+        {
+            isAlive = value;
+            animator.SetBool(AnimationStrings.IsAlive, isAlive);
+            Debug.Log("IsAlive " + isAlive);
+        }
+    }
 
     public bool lockMove
     {
@@ -63,7 +79,7 @@ public class MosquitoController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         mouseController = GetComponent<MouseController>();
-        hp = stat[StatType.hp];
+        Hp = new HP(stat[StatType.hp]);
         stamina = stat[StatType.stamina];
         speed = stat[StatType.speed];
     }
@@ -87,8 +103,7 @@ public class MosquitoController : MonoBehaviour
         float dx = target.x - transform.position.x;
         float dz = target.z - transform.position.z;
         float Rdirection = viewportPoint.x - 0.5f;
-        
-        
+
         //transform.rotation *= Quaternion.Euler(Vector3.up*(viewportPoint.x-0.5f)*90*rotationspeed);
         
         // 위아리좌우 이동 구현
@@ -199,6 +214,23 @@ public class MosquitoController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        transform.position = Vector3.Lerp(transform.position, transform.position - (transform.forward*knockback), knockbackSpeed*Time.deltaTime);
+        if (other.gameObject.layer == 7)
+        {
+            if (IsAlive)
+            {
+                Hp.value -= other.GetComponent<Attack>().attackDamage;
+                Vector3 knockbackValue = (other.gameObject.transform.position - Vector3.forward).normalized*knockback;
+                //transform.position += knockbackValue;
+                animator.SetTrigger("Hit");
+                Debug.Log("Hit");
+            }
+        }
+        else
+        {
+            transform.position = Vector3.Lerp(transform.position, transform.position - (transform.forward*knockback), knockbackSpeed*Time.deltaTime);
+            
+        }
     }
+    
+
 }

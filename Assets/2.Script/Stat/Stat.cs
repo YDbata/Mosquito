@@ -4,13 +4,17 @@ using System.Collections.Generic;
 using Mosquito.Stat;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Mosquito.Stat
 {
     public class Stat
     {
-        public StatDataModel type;
-
+        public StatType type;
+        public UnityEvent<float> onValueChanged;
+        public event Action<float> onValueModifiedChanged;
+        
+        
         public float value
         {
             get => _value;
@@ -21,7 +25,7 @@ namespace Mosquito.Stat
             }
         }
 
-        public int valueModified
+        public float valueModified
         {
             get => _valueModified;
             set
@@ -32,21 +36,20 @@ namespace Mosquito.Stat
         }
 
         private float _value;
-        private int _valueModified;
+        private float _valueModified;
         private List<StatModifier> _modifiers = new List<StatModifier>();
 
-        public event Action<float> onValueChanged;
-        public event Action<int> onValueModifiedChanged;
+
         
         /// <summary>
         /// 100% = 10000.0??
         /// </summary>
         /// <returns></returns>
-        private int CalcValueModified()
+        private float CalcValueModified()
         {
-            double sumFlatAdd = 0;
-            double sumPercentAdd = 0;
-            double sumPercentMul = 0;
+            float sumFlatAdd = 0;
+            float sumPercentAdd = 0;
+            float sumPercentMul = 0;
 
             foreach (var modifier in _modifiers)
             {
@@ -56,17 +59,17 @@ namespace Mosquito.Stat
                         sumFlatAdd += modifier.value;
                         break;
                     case StatModType.PercentAdd:
-                        sumPercentAdd += modifier.value / 10000.0;
+                        sumPercentAdd += modifier.value / 10000.0f;
                         break;
                     case StatModType.PercentMul:
-                        sumPercentMul *= modifier.value / 10000.0;
+                        sumPercentMul *= modifier.value / 10000.0f;
                         break;
                     default:
                         break;
                 }
             }
 
-            return (int)((value + sumFlatAdd) + (value * sumPercentAdd) + (value * sumPercentMul));
+            return ((value + sumFlatAdd) + (value * sumPercentAdd) + (value * sumPercentMul));
         }
         public void AddModifier(StatModifier modifier)
         {

@@ -10,5 +10,6 @@ public class AnimationStrings
     public static string CanMove = "CanMove";
     public static string IsSit = "IsSit";
     public static string IsRest = "IsRest";
+    public static string IsAlive = "IsAlive";
     
 }
