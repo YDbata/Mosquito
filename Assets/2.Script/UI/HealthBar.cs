@@ -24,16 +24,13 @@ namespace Mosquito.UI
 
         private void OnEnable()
         {
-            if (playerDamageAble)
-            {
-                playerDamageAble.Hp.onValueChanged.AddListener(OnPlayerHealthChanged);
-            }
+            
         }
         private void OnDisable()
         {
             if (playerDamageAble)
             {
-                playerDamageAble.Hp.onValueChanged.RemoveListener(OnPlayerHealthChanged);
+                playerDamageAble.Hp.onHpChanged-=(OnPlayerHealthChanged);
             }
         }
 
@@ -41,6 +38,10 @@ namespace Mosquito.UI
         private void Start()
         {
             healthSlider.value = CalculateSliderPercentage(playerDamageAble.Hp.value, playerDamageAble.Hp.MaxHp);
+            if (playerDamageAble)
+            {
+                playerDamageAble.Hp.onHpChanged+=(OnPlayerHealthChanged);
+            }
             //healthBarText.text = $"HP {playerDamageAble.Hp.value}/{playerDamageAble.Hp.MaxHp}";
         }
 

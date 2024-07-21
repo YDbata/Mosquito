@@ -31,11 +31,16 @@ public class MosquitoController : MonoBehaviour
     [Header("Attack&Hit")]
     [SerializeField] private float AttackCoolDown = 2f;
 
+    private float HitCoolDown;
+    [SerializeField] private float MaxHitCoolDown = 2f;
+
     [Header("Stat")] public InGameObjectSpecification stat;
+    public float StaminaDecrease = 4f;
+    private float StaminaUpdate = 0;
 
     private float speed = 5f;
     public HP Hp;
-    private float stamina;
+    public Stamina stamina;
     private bool IsRest = false;
 
     
@@ -75,12 +80,12 @@ public class MosquitoController : MonoBehaviour
     private MouseController mouseController;
     private Rigidbody rb;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody>();
         mouseController = GetComponent<MouseController>();
         Hp = new HP(stat[StatType.hp]);
-        stamina = stat[StatType.stamina];
+        stamina = new Stamina(stat[StatType.stamina]);
         speed = stat[StatType.speed];
     }
 
@@ -105,7 +110,22 @@ public class MosquitoController : MonoBehaviour
         float Rdirection = viewportPoint.x - 0.5f;
 
         //transform.rotation *= Quaternion.Euler(Vector3.up*(viewportPoint.x-0.5f)*90*rotationspeed);
+
+        #region Hit
+
+        if (HitCoolDown > 0)
+        {
+            HitCoolDown -= Time.deltaTime;
+        }
         
+        #endregion
+
+        #region Stamina
+
+        StaminaUpdate = StaminaDecrease*Time.deltaTime;
+        
+
+        #endregion
         // 위아리좌우 이동 구현
         Vector3 direction = new Vector3(dx, dy, dz);
         Vector3 velocity;
@@ -140,6 +160,7 @@ public class MosquitoController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
         {
             velocity *= fastSpeed;
+            StaminaUpdate += StaminaDecrease*Time.deltaTime;
         }
         else
         {
@@ -150,6 +171,8 @@ public class MosquitoController : MonoBehaviour
             // 기본 공격
             velocity = new Vector3(0f, 0f, 0f);
             animator.SetTrigger(AnimationStrings.Attack);
+            StaminaUpdate += 5f;
+
         }
 
         if (Input.GetMouseButtonDown(1))
@@ -157,6 +180,7 @@ public class MosquitoController : MonoBehaviour
             // 강공
             velocity = new Vector3(0f, 0f, 0f);
             animator.SetTrigger(AnimationStrings.SAttack);
+            StaminaUpdate += 10f;
         }
         
         transform.rotation = mosquitoRotation;
@@ -209,12 +233,20 @@ public class MosquitoController : MonoBehaviour
                 isRest = false;
             }
         }
-        
+
+
+        #region StaminaUpdate
+
+        stamina.value -= StaminaUpdate;
+        StaminaUpdate = 0;
+
+        #endregion
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 7)
+        if (other.gameObject.layer == 7 && HitCoolDown <= 0)
         {
             if (IsAlive)
             {
@@ -222,7 +254,8 @@ public class MosquitoController : MonoBehaviour
                 Vector3 knockbackValue = (other.gameObject.transform.position - Vector3.forward).normalized*knockback;
                 //transform.position += knockbackValue;
                 animator.SetTrigger("Hit");
-                Debug.Log("Hit");
+                Debug.Log("Hit "+Hp.value);
+                HitCoolDown = MaxHitCoolDown;
             }
         }
         else

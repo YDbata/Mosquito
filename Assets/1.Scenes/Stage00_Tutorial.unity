@@ -3755,7 +3755,9 @@ MonoBehaviour:
   knockbackSpeed: 2
   restPointDistance: 0.4
   AttackCoolDown: 2
+  MaxHitCoolDown: 2
   stat: {fileID: 11400000, guid: b80d87443c38e4895b59d683ba1cabc7, type: 2}
+  StaminaDecrease: 0.5
   isAlive: 1
 --- !u!4 &1090991320
 Transform:
@@ -5479,6 +5481,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1326268836}
+  - component: {fileID: 1326268838}
   - component: {fileID: 1326268837}
   m_Layer: 5
   m_Name: Status
@@ -5559,6 +5562,19 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1326268838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1326268835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cf49bce39ac45a5bd015281d166933d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Slider: {fileID: 1326268837}
 --- !u!1 &1333313451
 GameObject:
   m_ObjectHideFlags: 0

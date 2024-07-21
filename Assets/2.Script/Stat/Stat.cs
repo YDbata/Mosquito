@@ -11,7 +11,7 @@ namespace Mosquito.Stat
     public class Stat
     {
         public StatType type;
-        public UnityEvent<float> onValueChanged;
+        public event Action<float> onValueChanged;
         public event Action<float> onValueModifiedChanged;
         
         
