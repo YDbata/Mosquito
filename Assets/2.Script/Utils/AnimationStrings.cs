@@ -11,5 +11,6 @@ public class AnimationStrings
     public static string IsSit = "IsSit";
     public static string IsRest = "IsRest";
     public static string IsAlive = "IsAlive";
+    public static string IsAttack = "IsAttack";
     
 }

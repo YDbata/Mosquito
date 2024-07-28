@@ -123,6 +123,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 98994e907d8d54e8b9c5f14ffe68500d, type: 2}
+--- !u!1 &26763665
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 26763666}
+  m_Layer: 7
+  m_Name: NeckPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &26763666
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 26763665}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.049, y: 0.043, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 420504778}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &41503479 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1568983460347631277, guid: e0f4fb8c42514d64986a26fff32797f1, type: 3}
@@ -400,6 +431,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &90270258
 GameObject:
   m_ObjectHideFlags: 0
@@ -469,6 +501,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &110883065
 GameObject:
   m_ObjectHideFlags: 0
@@ -560,6 +593,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &120351359
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,6 +640,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &129924798
 GameObject:
   m_ObjectHideFlags: 3
@@ -617,7 +652,7 @@ GameObject:
   - component: {fileID: 129924799}
   - component: {fileID: 129924802}
   - component: {fileID: 129924801}
-  - component: {fileID: 129924800}
+  - component: {fileID: 129924803}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -640,19 +675,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 665033056}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &129924800
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 129924798}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4c41ac9245b87c4192012080077d830, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Damping: 1
 --- !u!114 &129924801
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -671,17 +693,17 @@ MonoBehaviour:
   m_LookaheadIgnoreY: 0
   m_XDamping: 0
   m_YDamping: 0
-  m_ZDamping: 0
+  m_ZDamping: 0.6
   m_TargetMovementOnly: 1
   m_ScreenX: 0.5
-  m_ScreenY: 0.71
+  m_ScreenY: 0.71000004
   m_CameraDistance: 0.15
   m_DeadZoneWidth: 0
-  m_DeadZoneHeight: 0
+  m_DeadZoneHeight: 0.08
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
   m_SoftZoneWidth: 0.15
-  m_SoftZoneHeight: 0.17
+  m_SoftZoneHeight: 0.2
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
@@ -708,6 +730,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &129924803
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129924798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c9beda531928fc40968802117a5d256, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RecenterTarget: 1
+  m_VerticalAxis:
+    Value: 0
+    m_SpeedMode: 0
+    m_MaxSpeed: 500
+    m_AccelTime: 0.1
+    m_DecelTime: 0.1
+    m_InputAxisName: Mouse Y
+    m_InputAxisValue: 0
+    m_InvertInput: 1
+    m_MinValue: 0
+    m_MaxValue: 0
+    m_Wrap: 0
+    m_Recentering:
+      m_enabled: 0
+      m_WaitTime: 1
+      m_RecenteringTime: 2
+      m_LegacyHeadingDefinition: -1
+      m_LegacyVelocityFilterStrength: -1
+  m_VerticalRecentering:
+    m_enabled: 0
+    m_WaitTime: 1
+    m_RecenteringTime: 2
+    m_LegacyHeadingDefinition: -1
+    m_LegacyVelocityFilterStrength: -1
+  m_HorizontalAxis:
+    Value: 90.00001
+    m_SpeedMode: 0
+    m_MaxSpeed: 500
+    m_AccelTime: 0.1
+    m_DecelTime: 0.1
+    m_InputAxisName: Mouse X
+    m_InputAxisValue: 0
+    m_InvertInput: 0
+    m_MinValue: -360
+    m_MaxValue: 360
+    m_Wrap: 0
+    m_Recentering:
+      m_enabled: 0
+      m_WaitTime: 1
+      m_RecenteringTime: 2
+      m_LegacyHeadingDefinition: -1
+      m_LegacyVelocityFilterStrength: -1
+  m_HorizontalRecentering:
+    m_enabled: 1
+    m_WaitTime: 1
+    m_RecenteringTime: 1
+    m_LegacyHeadingDefinition: -1
+    m_LegacyVelocityFilterStrength: -1
+  m_ApplyBeforeBody: 0
 --- !u!1 &161525621
 GameObject:
   m_ObjectHideFlags: 0
@@ -733,7 +817,7 @@ Transform:
   m_GameObject: {fileID: 161525621}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.008, y: 1.073, z: 0.442}
+  m_LocalPosition: {x: 0.197, y: 0.758, z: 0.0512}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -910,6 +994,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &272073239
 GameObject:
   m_ObjectHideFlags: 0
@@ -979,6 +1064,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &299328651
 GameObject:
   m_ObjectHideFlags: 0
@@ -1149,6 +1235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &352708827
 GameObject:
   m_ObjectHideFlags: 0
@@ -1293,6 +1380,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &382040461
 GameObject:
   m_ObjectHideFlags: 0
@@ -1339,6 +1427,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &389317644
 GameObject:
   m_ObjectHideFlags: 0
@@ -1458,6 +1547,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &420504777
 GameObject:
   m_ObjectHideFlags: 0
@@ -1489,6 +1579,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 724570189}
+  - {fileID: 26763666}
   m_Father: {fileID: 1787529100}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &420504779
@@ -1505,6 +1596,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &428267632
 GameObject:
   m_ObjectHideFlags: 0
@@ -1551,6 +1643,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &495851547
 GameObject:
   m_ObjectHideFlags: 0
@@ -1727,6 +1820,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &539440022
 GameObject:
   m_ObjectHideFlags: 0
@@ -1798,6 +1892,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &546378309
 GameObject:
   m_ObjectHideFlags: 0
@@ -1963,6 +2058,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &570282336
 GameObject:
   m_ObjectHideFlags: 0
@@ -2065,6 +2161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &647898383
 GameObject:
   m_ObjectHideFlags: 0
@@ -2160,8 +2257,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 665033054}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 9.168003, y: 0.91337305, z: 12.304003}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071067}
+  m_LocalPosition: {x: 9.167999, y: 0.91337305, z: 12.303998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2422,6 +2519,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &712986770
 GameObject:
   m_ObjectHideFlags: 0
@@ -2615,6 +2713,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &754194067
 GameObject:
   m_ObjectHideFlags: 0
@@ -2754,6 +2853,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &811977262
 GameObject:
   m_ObjectHideFlags: 0
@@ -2823,6 +2923,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &826986593
 GameObject:
   m_ObjectHideFlags: 0
@@ -2894,6 +2995,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &834775330
 GameObject:
   m_ObjectHideFlags: 0
@@ -3061,6 +3163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &873493960
 GameObject:
   m_ObjectHideFlags: 0
@@ -3107,6 +3210,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &879094703
 GameObject:
   m_ObjectHideFlags: 0
@@ -3178,6 +3282,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &909051431
 GameObject:
   m_ObjectHideFlags: 0
@@ -3224,6 +3329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &912640518
 GameObject:
   m_ObjectHideFlags: 0
@@ -3450,8 +3556,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 9.168003, y: 0.91337305, z: 12.304003}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071067}
+  m_LocalPosition: {x: 9.167999, y: 0.91337305, z: 12.303998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3538,6 +3644,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &1027599763
 GameObject:
   m_ObjectHideFlags: 0
@@ -3727,6 +3834,7 @@ GameObject:
   - component: {fileID: 1090991326}
   - component: {fileID: 1090991324}
   - component: {fileID: 1090991325}
+  - component: {fileID: 1090991327}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -3843,6 +3951,20 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &1090991327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090991318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f96767bb0154f9ba137f5ce7e959945, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 10
+  knockback: 0.2
 --- !u!1 &1091462016
 GameObject:
   m_ObjectHideFlags: 0
@@ -3912,6 +4034,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &1098668022
 GameObject:
   m_ObjectHideFlags: 0
@@ -4087,6 +4210,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1106923826}
+  - component: {fileID: 1106923827}
   m_Layer: 7
   m_Name: GameObject
   m_TagString: Untagged
@@ -4109,6 +4233,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1793627594}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1106923827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106923825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeda7bfbf984f2a4da5ab4b8967b115d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Weight: 1
+  m_Data:
+    m_Root: {fileID: 1320847234}
+    m_Mid: {fileID: 2145413104}
+    m_Tip: {fileID: 1267103307}
+    m_Target: {fileID: 26763666}
+    m_Hint: {fileID: 0}
+    m_TargetPositionWeight: 1
+    m_TargetRotationWeight: 1
+    m_HintWeight: 1
+    m_MaintainTargetPositionOffset: 0
+    m_MaintainTargetRotationOffset: 0
 --- !u!1 &1113679677
 GameObject:
   m_ObjectHideFlags: 0
@@ -4180,6 +4328,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &1138004040
 GameObject:
   m_ObjectHideFlags: 0
@@ -4251,6 +4400,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &1143531665
 GameObject:
   m_ObjectHideFlags: 0
@@ -4320,6 +4470,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &1148177520
 GameObject:
   m_ObjectHideFlags: 0
@@ -4422,6 +4573,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &1175602268
 GameObject:
   m_ObjectHideFlags: 0
@@ -4688,6 +4840,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &1202844221
 GameObject:
   m_ObjectHideFlags: 0
@@ -4759,6 +4912,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &1206285196
 GameObject:
   m_ObjectHideFlags: 0
@@ -4830,6 +4984,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &1225728003
 GameObject:
   m_ObjectHideFlags: 0
@@ -4899,6 +5054,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &1242203195
 GameObject:
   m_ObjectHideFlags: 0
@@ -4945,6 +5101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &1249485338
 GameObject:
   m_ObjectHideFlags: 0
@@ -5141,6 +5298,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &1279750617
 GameObject:
   m_ObjectHideFlags: 0
@@ -5210,6 +5368,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &1289640836
 GameObject:
   m_ObjectHideFlags: 0
@@ -5312,6 +5471,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &1314897397
 GameObject:
   m_ObjectHideFlags: 0
@@ -5381,6 +5541,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &1320847233
 GameObject:
   m_ObjectHideFlags: 0
@@ -5472,6 +5633,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &1326268835
 GameObject:
   m_ObjectHideFlags: 0
@@ -5669,6 +5831,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &1369976559
 GameObject:
   m_ObjectHideFlags: 0
@@ -5714,7 +5877,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70b342d8ce5c2fd48b8fa3147d48d1d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Weight: 0
+  m_Weight: 0.978
   m_Effectors:
   - m_Transform: {fileID: 0}
     m_Style:
@@ -5817,6 +5980,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &1406430139
 GameObject:
   m_ObjectHideFlags: 0
@@ -5886,6 +6050,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &1431387045
 GameObject:
   m_ObjectHideFlags: 0
@@ -5932,6 +6097,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &1461753019
 GameObject:
   m_ObjectHideFlags: 0
@@ -6057,7 +6223,7 @@ MonoBehaviour:
     m_SourceObjects:
       m_Length: 1
       m_Item0:
-        transform: {fileID: 1090991320}
+        transform: {fileID: 161525622}
         weight: 1
       m_Item1:
         transform: {fileID: 0}
@@ -6164,6 +6330,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!4 &1499713155 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 382601eef3e282b4d9d320728053c1c8, type: 3}
@@ -6521,6 +6688,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &1613075880
 GameObject:
   m_ObjectHideFlags: 0
@@ -6662,6 +6830,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &1650775166
 GameObject:
   m_ObjectHideFlags: 0
@@ -6732,6 +6901,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &1651622282
 GameObject:
   m_ObjectHideFlags: 0
@@ -6968,6 +7138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &1687203626
 GameObject:
   m_ObjectHideFlags: 0
@@ -7091,6 +7262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &1705989933
 GameObject:
   m_ObjectHideFlags: 0
@@ -7364,6 +7536,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &1793627593
 GameObject:
   m_ObjectHideFlags: 0
@@ -7416,7 +7589,7 @@ MonoBehaviour:
     m_Style:
       shape: {fileID: 4300000, guid: e050c2b16fe384bd994474655a4b4968, type: 2}
       color: {r: 1, g: 0, b: 0, a: 0.5}
-      size: 0.1
+      size: 0.01
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
     m_Visible: 1
@@ -7424,7 +7597,7 @@ MonoBehaviour:
     m_Style:
       shape: {fileID: 4300000, guid: e050c2b16fe384bd994474655a4b4968, type: 2}
       color: {r: 1, g: 0, b: 0, a: 0.5}
-      size: 0.1
+      size: 0.01
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
     m_Visible: 1
@@ -7432,7 +7605,7 @@ MonoBehaviour:
     m_Style:
       shape: {fileID: 4300000, guid: e050c2b16fe384bd994474655a4b4968, type: 2}
       color: {r: 1, g: 0, b: 0, a: 0.5}
-      size: 0.1
+      size: 0.01
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
     m_Visible: 1
@@ -7440,7 +7613,7 @@ MonoBehaviour:
     m_Style:
       shape: {fileID: 4300000, guid: e050c2b16fe384bd994474655a4b4968, type: 2}
       color: {r: 1, g: 0, b: 0, a: 0.5}
-      size: 0.1
+      size: 0.01
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
     m_Visible: 1
@@ -7601,6 +7774,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &1840615790
 GameObject:
   m_ObjectHideFlags: 0
@@ -7789,6 +7963,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &1861415577
 GameObject:
   m_ObjectHideFlags: 0
@@ -7858,6 +8033,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &1866855566
 GameObject:
   m_ObjectHideFlags: 0
@@ -8132,6 +8308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &1875860796
 GameObject:
   m_ObjectHideFlags: 0
@@ -8202,6 +8379,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &1925031648
 GameObject:
   m_ObjectHideFlags: 0
@@ -8521,6 +8699,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &1956797098
 GameObject:
   m_ObjectHideFlags: 0
@@ -8590,6 +8769,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &1971910048
 GameObject:
   m_ObjectHideFlags: 0
@@ -8663,6 +8843,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &2002206997
 GameObject:
   m_ObjectHideFlags: 0
@@ -8709,6 +8890,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &2031941768
 GameObject:
   m_ObjectHideFlags: 0
@@ -8827,6 +9009,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &2044084163
 GameObject:
   m_ObjectHideFlags: 0
@@ -8873,6 +9056,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &2088261997
 GameObject:
   m_ObjectHideFlags: 0
@@ -8944,6 +9128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &2097035534
 GameObject:
   m_ObjectHideFlags: 0
@@ -9015,6 +9200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &2100119959
 GameObject:
   m_ObjectHideFlags: 0
@@ -9086,6 +9272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1001 &2107337199
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9246,6 +9433,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: 0.2
+  hasTakeDamage: 0
 --- !u!1 &9171100360094824
 GameObject:
   m_ObjectHideFlags: 0
@@ -18543,8 +18731,8 @@ SceneRoots:
   - {fileID: 834775331}
   - {fileID: 1070808023}
   - {fileID: 546378311}
-  - {fileID: 665033056}
   - {fileID: 1925031652}
+  - {fileID: 665033056}
   - {fileID: 1090991320}
   - {fileID: 1571000270}
   - {fileID: 1866880409}

@@ -3,9 +3,10 @@ using UnityEngine;
 
 namespace Mosquito.CommonSystem
 {
-    public class Attack : MonoBehaviour
+    public class ColliderDamage : MonoBehaviour
     {
         public int attackDamage = 10;
         public float knockback = 0.2f;
+        public bool hasTakeDamage=false;
     }
 }

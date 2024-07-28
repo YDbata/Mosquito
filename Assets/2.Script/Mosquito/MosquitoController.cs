@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Cinemachine.Utility;
 using Mosquito.CommonSystem;
+using Mosquito.Script;
 using Mosquito.Stat;
 using Mosquito.Utils;
 using Unity.VisualScripting;
@@ -30,6 +31,9 @@ public class MosquitoController : MonoBehaviour
 
     [Header("Attack&Hit")]
     [SerializeField] private float AttackCoolDown = 2f;
+
+    private bool isAttack;
+    private PlayerAttack attack;
 
     private float HitCoolDown;
     [SerializeField] private float MaxHitCoolDown = 2f;
@@ -67,6 +71,15 @@ public class MosquitoController : MonoBehaviour
         }
     }
 
+    public bool IsAttack
+    {
+        get { return animator.GetBool(AnimationStrings.IsAttack); }
+        set
+        {
+            animator.SetBool(AnimationStrings.IsAttack, value);
+        }
+    }
+
     public bool isRest
     {
         get { return animator.GetBool(AnimationStrings.IsRest); }
@@ -87,6 +100,7 @@ public class MosquitoController : MonoBehaviour
         Hp = new HP(stat[StatType.hp]);
         stamina = new Stamina(stat[StatType.stamina]);
         speed = stat[StatType.speed];
+        attack = GetComponent<PlayerAttack>();
     }
 
     // Update is called once per frame
@@ -166,6 +180,7 @@ public class MosquitoController : MonoBehaviour
         {
             velocity *= speed;
         }
+        
         if (Input.GetMouseButtonDown(0))
         {
             // 기본 공격
@@ -246,11 +261,15 @@ public class MosquitoController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 7 && HitCoolDown <= 0)
+        if (IsAttack)
+        {
+            attack.TryAttack(other);
+        }
+        else if (other.gameObject.layer == 7 && HitCoolDown <= 0)
         {
             if (IsAlive)
             {
-                Hp.value -= other.GetComponent<Attack>().attackDamage;
+                Hp.value -= other.GetComponent<ColliderDamage>().attackDamage;
                 Vector3 knockbackValue = (other.gameObject.transform.position - Vector3.forward).normalized*knockback;
                 //transform.position += knockbackValue;
                 animator.SetTrigger("Hit");
