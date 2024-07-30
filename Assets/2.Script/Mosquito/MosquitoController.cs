@@ -89,6 +89,11 @@ public class MosquitoController : MonoBehaviour
             animator.SetBool(AnimationStrings.IsRest, value);
         }
     }
+
+    public bool LockRotate
+    {
+        get { return animator.GetBool(AnimationStrings.LockRotate); }
+    }
     
     private MouseController mouseController;
     private Rigidbody rb;
@@ -143,6 +148,7 @@ public class MosquitoController : MonoBehaviour
         // 위아리좌우 이동 구현
         Vector3 direction = new Vector3(dx, dy, dz);
         Vector3 velocity;
+        Vector3 height = (Vector3.left * (viewportPoint.y - 0.5f) * 180) * (Convert.ToInt32(!LockRotate));
         if (Input.GetKey(KeyCode.W))
         {
             velocity = direction;//dx*30
@@ -151,23 +157,21 @@ public class MosquitoController : MonoBehaviour
         {
             velocity = new Vector3(0, 0, 0);
         }
-        mosquitoRotation = Quaternion.Euler((Vector3.left * (viewportPoint.y - 0.5f)*180) + new Vector3(0, transform.eulerAngles.y, 0));
+        mosquitoRotation = Quaternion.Euler(height + new Vector3(0, transform.eulerAngles.y, 0));
         
         // 좌우 구현(가속)
         if (Input.GetKey(KeyCode.A))
         {
             Rdirection -= accrotation;
-            velocity = direction;
-            mosquitoRotation = Quaternion.Euler((Vector3.left * (viewportPoint.y - 0.5f)*180) 
-                                                + (Vector3.up*(Rdirection)*rotationspeed + new Vector3(0, transform.eulerAngles.y, 0)));
+            //velocity = direction;
+            mosquitoRotation = Quaternion.Euler(height + (Vector3.up*(Rdirection)*rotationspeed + new Vector3(0, transform.eulerAngles.y, 0)));
         }
 
         if (Input.GetKey(KeyCode.D))
         {
             Rdirection += accrotation;
-            velocity = direction;
-            mosquitoRotation = Quaternion.Euler((Vector3.left * (viewportPoint.y - 0.5f)*180) 
-                                                + (Vector3.up*(Rdirection)*rotationspeed + new Vector3(0, transform.eulerAngles.y, 0)));
+            //velocity = direction;
+            mosquitoRotation = Quaternion.Euler(height + (Vector3.up*(Rdirection)*rotationspeed + new Vector3(0, transform.eulerAngles.y, 0)));
         }
         
         
@@ -181,7 +185,7 @@ public class MosquitoController : MonoBehaviour
             velocity *= speed;
         }
         
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !isRest)
         {
             // 기본 공격
             velocity = new Vector3(0f, 0f, 0f);
@@ -190,7 +194,7 @@ public class MosquitoController : MonoBehaviour
 
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && !isRest)
         {
             // 강공
             velocity = new Vector3(0f, 0f, 0f);
@@ -208,6 +212,29 @@ public class MosquitoController : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         
+        // 휴식 키 클릭
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            
+            if (!isRest)
+            {
+
+                if (mouseController.currentCursorType == CursorType.Rest)
+                {
+                    mouseController.SetCursor(CursorType.None);
+                    isRest = true;
+                    Physics.Raycast(ray, out hit);
+                    transform.position = hit.point;
+                }
+            }
+            else
+            {
+                
+                mouseController.SetCursor(CursorType.None);
+                isRest = false;
+            }
+        }
+        // 휴식 전에 F키 보이기 및 휴식
         if (!isRest)
         {
             if (Physics.Raycast(ray, out hit) && hit.transform.gameObject.layer != 7)
@@ -230,24 +257,6 @@ public class MosquitoController : MonoBehaviour
             mouseController.SetCursor(CursorType.None);
         }
         
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            
-            if (!isRest)
-            {
-
-                if (mouseController.currentCursorType == CursorType.Rest)
-                {
-                    mouseController.SetCursor(CursorType.None);
-                    isRest = true;
-                }
-            }
-            else
-            {
-                mouseController.SetCursor(CursorType.None);
-                isRest = false;
-            }
-        }
 
 
         #region StaminaUpdate
@@ -259,8 +268,14 @@ public class MosquitoController : MonoBehaviour
 
     }
 
+    private void hasAttack()
+    {
+        
+    }
+    
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("IsAttack "+IsAttack);
         if (IsAttack)
         {
             attack.TryAttack(other);

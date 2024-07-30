@@ -10,6 +10,7 @@ namespace Mosquito.Script
         public void TryAttack(Collider other)
         {
             Debug.Log(other);
+            // 퀘스트 정보 업데이트
         }
     }
 }
