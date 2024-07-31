@@ -208,7 +208,9 @@ public class MosquitoController : MonoBehaviour
             
             rb.velocity = velocity;
         }
-        
+
+        #region Rest
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         
@@ -257,7 +259,7 @@ public class MosquitoController : MonoBehaviour
             mouseController.SetCursor(CursorType.None);
         }
         
-
+        #endregion
 
         #region StaminaUpdate
 
