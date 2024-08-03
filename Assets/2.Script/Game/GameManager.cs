@@ -12,6 +12,8 @@ public enum GameState
     LoadResources,
     WaitUntilResourcesLoaded,
     Home,
+    LobbyLoaded,
+    Lobby,
     StageLoaded,
     Stage,
 }
@@ -32,8 +34,10 @@ public class GameManager : SingletonMonoBase<GameManager>
         }
     }
 
-    [Header("Current State")] [SerializeField]
-    private GameState _state;
+    [Header("Current State")] 
+    public GameState _state;
+
+    public string StageName = "";
 
     protected override void Awake()
     {
@@ -46,7 +50,7 @@ public class GameManager : SingletonMonoBase<GameManager>
         Workflow();
     }
 
-    private void Workflow(string SceneName="")
+    private void Workflow()
     {
         switch (_state)
         {
@@ -60,9 +64,19 @@ public class GameManager : SingletonMonoBase<GameManager>
                 _state++;
                 break;
             case GameState.Home:
+                if (Input.anyKeyDown)
+                {
+                    _state++;
+                }
+                break;
+            case GameState.LobbyLoaded:
+                SceneManager.LoadScene("Lobby");
+                _state++;
+                break;
+            case GameState.Lobby:
                 break;
             case GameState.StageLoaded:
-                SceneManager.LoadScene(SceneName);
+                SceneManager.LoadScene(StageName);
                 // 페이드 효과
                 
                 _state++;
