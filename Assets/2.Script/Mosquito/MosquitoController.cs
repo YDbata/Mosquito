@@ -39,7 +39,7 @@ public class MosquitoController : MonoBehaviour
     [SerializeField] private float MaxHitCoolDown = 2f;
 
     [Header("Stat")] public InGameObjectSpecification stat;
-    public float StaminaDecrease = 4f;
+    public float StaminaDecrease = 1f;
     private float StaminaUpdate = 0;
 
     private float speed = 5f;
@@ -218,9 +218,7 @@ public class MosquitoController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             
-            if (!isRest)
-            {
-
+            if (!isRest){
                 if (mouseController.currentCursorType == CursorType.Rest)
                 {
                     mouseController.SetCursor(CursorType.None);
@@ -256,7 +254,10 @@ public class MosquitoController : MonoBehaviour
         }
         else
         {
+            // 휴식중
             mouseController.SetCursor(CursorType.None);
+            // 스테미나 충전
+            StaminaUpdate = -StaminaDecrease * Time.deltaTime*2;
         }
         
         #endregion
@@ -265,15 +266,12 @@ public class MosquitoController : MonoBehaviour
 
         stamina.value -= StaminaUpdate;
         StaminaUpdate = 0;
+        
 
         #endregion
 
     }
-
-    private void hasAttack()
-    {
-        
-    }
+    
     
     private void OnTriggerEnter(Collider other)
     {
@@ -287,6 +285,11 @@ public class MosquitoController : MonoBehaviour
             if (IsAlive)
             {
                 Hp.value -= other.GetComponent<ColliderDamage>().attackDamage;
+                if (Hp.value <= 0)
+                {
+                    IsAlive = false;
+                    lockMove = true;
+                }
                 Vector3 knockbackValue = (other.gameObject.transform.position - Vector3.forward).normalized*knockback;
                 //transform.position += knockbackValue;
                 animator.SetTrigger("Hit");

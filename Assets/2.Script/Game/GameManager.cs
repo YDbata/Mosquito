@@ -16,6 +16,7 @@ public enum GameState
     Lobby,
     StageLoaded,
     Stage,
+    GameOver
 }
 
 public class GameManager : SingletonMonoBase<GameManager>
@@ -80,6 +81,9 @@ public class GameManager : SingletonMonoBase<GameManager>
                 // 페이드 효과
                 
                 _state++;
+                break;
+            case GameState.GameOver:
+                // GameOver UI 실행 및 메뉴 보이기
                 break;
             case GameState.Stage:
                 break;
