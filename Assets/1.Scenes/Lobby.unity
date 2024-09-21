@@ -384,6 +384,7 @@ MonoBehaviour:
   leftImg: {fileID: 1481967825}
   rightImg: {fileID: 2099594044}
   choiceBtn: {fileID: 504181744}
+  StageBtnText: {fileID: 61181838}
 --- !u!1 &61181836
 GameObject:
   m_ObjectHideFlags: 0
@@ -441,7 +442,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Stage
+  m_text: Stage00
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 821db6c8e6aef4a1ca32ee7a3bb4fe39, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 821db6c8e6aef4a1ca32ee7a3bb4fe39, type: 2}
@@ -564,7 +565,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 207211622}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -614,7 +615,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1893,7 +1894,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1631417964}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 30511818}
+        m_TargetAssemblyTypeName: ScreenChage, Assembly-CSharp
+        m_MethodName: StartOnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1631417964
 MonoBehaviour:
   m_ObjectHideFlags: 0
