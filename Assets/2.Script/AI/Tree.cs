@@ -18,11 +18,11 @@ namespace Mosquito.AI
         private Stack<Composite> _composites;
         private void Update()
         {
-            if (!isrunning)
-            {
-                isrunning = true;
-                StartCoroutine(C_Tick());
-            }
+            // if (!isrunning)
+            // {
+            //     isrunning = true;
+            //     StartCoroutine(C_Tick());
+            // }
         }
 
         private IEnumerator C_Tick()

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using Cinemachine.Utility;
 using Mosquito.CommonSystem;
 using Mosquito.Script;
@@ -46,6 +47,10 @@ public class MosquitoController : MonoBehaviour
     public HP Hp;
     public Stamina stamina;
     private bool IsRest = false;
+
+    [Header("Camera")] [SerializeField] private GameObject basicCamera;
+    [SerializeField] private GameObject focusingCamera;
+    private bool isBasicCamera = true;
 
     
     
@@ -179,13 +184,16 @@ public class MosquitoController : MonoBehaviour
         {
             velocity *= fastSpeed;
             StaminaUpdate += StaminaDecrease*Time.deltaTime;
-        }
-        else
-        {
-            velocity *= speed;
-        }
-        
-        if (Input.GetMouseButtonDown(0) && !isRest)
+            //강공격
+            if (Input.GetMouseButtonDown(0) && !isRest)
+            {
+                // 강공
+                velocity = new Vector3(0f, 0f, 0f);
+                animator.SetTrigger(AnimationStrings.SAttack);
+                StaminaUpdate += 10f;
+            }
+        }//공격
+        else if (Input.GetMouseButtonDown(0) && !isRest)
         {
             // 기본 공격
             velocity = new Vector3(0f, 0f, 0f);
@@ -193,13 +201,15 @@ public class MosquitoController : MonoBehaviour
             StaminaUpdate += 5f;
 
         }
-
-        if (Input.GetMouseButtonDown(1) && !isRest)
+        else
         {
-            // 강공
-            velocity = new Vector3(0f, 0f, 0f);
-            animator.SetTrigger(AnimationStrings.SAttack);
-            StaminaUpdate += 10f;
+            velocity *= speed;
+        }
+        
+        // 카메라 둘러보기
+        if (Input.GetMouseButtonDown(1))
+        {
+            
         }
         
         transform.rotation = mosquitoRotation;
@@ -270,6 +280,18 @@ public class MosquitoController : MonoBehaviour
 
         #endregion
 
+        #region CameraChange
+
+        if (Input.GetKeyDown(KeyCode.LeftAlt))
+        {
+            basicCamera.SetActive(!isBasicCamera);
+            focusingCamera.SetActive(isBasicCamera);
+
+            isBasicCamera = !isBasicCamera;
+        }
+
+        #endregion
+
     }
     
     
@@ -302,6 +324,8 @@ public class MosquitoController : MonoBehaviour
             transform.position = Vector3.Lerp(transform.position, transform.position - (transform.forward*knockback), knockbackSpeed*Time.deltaTime);
             
         }
+        if(HitCoolDown > 0)
+            HitCoolDown -= Time.deltaTime;
     }
     
 
