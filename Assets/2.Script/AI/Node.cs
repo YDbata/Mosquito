@@ -20,6 +20,7 @@ namespace Mosquito.AI
     {
         protected Tree tree;
         protected Blackboard blackboard;
+        public string NodeName;
         
         public Node(Tree tree)
         {

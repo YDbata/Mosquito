@@ -18,11 +18,11 @@ namespace Mosquito.AI
         private Stack<Composite> _composites;
         private void Update()
         {
-            // if (!isrunning)
-            // {
-            //     isrunning = true;
-            //     StartCoroutine(C_Tick());
-            // }
+            if (!isrunning)
+            {
+                isrunning = true;
+                StartCoroutine(C_Tick());
+            }
         }
 
         private IEnumerator C_Tick()
@@ -75,18 +75,18 @@ namespace Mosquito.AI
 
         #region Composite&Deco
 
-        public Tree Selector()
+        public Tree Selector(string name)
         {
-            Composite selector = new Selector(this);
+            Composite selector = new Selector(this, name);
             Attach(_current, selector);
             _composites.Push(selector);
             _current = selector;
             return this;
         }
 
-        public Tree Sequence()
+        public Tree Sequence(string name)
         {
-            Composite sequence = new Sequence(this);
+            Composite sequence = new Sequence(this, name);
             Attach(_current, sequence);
             _composites.Push(sequence);
             _current = sequence;

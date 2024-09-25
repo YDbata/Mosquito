@@ -5,7 +5,7 @@ namespace Mosquito.AI
 {
     public class Selector : Composite
     {
-        public Selector(Tree tree) : base(tree)
+        public Selector(Tree tree, string name) : base(tree, name)
         {
         }
 
@@ -32,6 +32,20 @@ namespace Mosquito.AI
 
             currentSiblingIndex = 0;
             return result;
+        }
+
+        public Node FindChildren(string name)
+        {
+            for (int i = 0; i < children.Count; i++)
+            {
+                
+                if (name.Equals(children[i].NodeName))
+                {
+                    return children[i];
+                }
+            }
+
+            return null;
         }
     }
 }

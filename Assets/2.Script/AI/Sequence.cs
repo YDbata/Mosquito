@@ -6,7 +6,7 @@ namespace Mosquito.AI
     public class Sequence : Composite
     {
 
-        public Sequence(Tree tree) : base(tree)
+        public Sequence(Tree tree, string name) : base(tree, name)
         {
         }
 
