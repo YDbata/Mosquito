@@ -1,5 +1,7 @@
+using Mosquito.Character;
 using UnityEngine;
 using UnityEngine.AI;
+using CharacterController = UnityEngine.CharacterController;
 
 namespace Mosquito.AI
 {
@@ -12,7 +14,8 @@ namespace Mosquito.AI
         public Tree tree;
         public Transform transform;
         public NavMeshAgent agent;
-        public CharacterController controller;
+        //public CharacterController controller;
+        public HumanController controller;
         public Animator animator;
         
         // target : 트리 안에서 판단을 위해 접근하는 주체
@@ -26,7 +29,8 @@ namespace Mosquito.AI
             this.tree = tree;
             this.transform = tree.GetComponent<Transform>();
             this.agent = tree.GetComponent<NavMeshAgent>();
-            this.controller = tree.GetComponent<CharacterController>();
+            //this.controller = tree.GetComponent<CharacterController>();
+            this.controller = tree.GetComponent<HumanController>();
             this.animator = tree.GetComponent<Animator>();
             this.target = null;
         }

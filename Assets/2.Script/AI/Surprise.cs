@@ -10,8 +10,16 @@ namespace Mosquito.AI
 
         public override Result Invoke()
         {
-            Debug.Log("Attack Node Invoke "+ blackboard.isAttack);
-            throw new System.NotImplementedException();
+            //Debug.Log("Surprise Node Invoke "+ blackboard.isAttack);
+            if (blackboard.controller.isHit)
+            {
+                Debug.Log("Surprise Seccese!");
+                blackboard.controller.isHit = false;
+                return Result.Success;
+            }
+
+            return Result.Failure;
+            //throw new System.NotImplementedException();
         }
     }
 }

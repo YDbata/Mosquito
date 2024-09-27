@@ -12,7 +12,7 @@ namespace Mosquito.AI
 
         public override Result Invoke()
         {
-            Debug.Log("Attack Node Invoke "+ blackboard.isAttack);
+            //Debug.Log("Attack Node Invoke "+ blackboard.isAttack);
             if (blackboard.isAttack)
             {
                 blackboard.animator.SetTrigger("Attack");
