@@ -789,7 +789,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: CHOICE!
+  m_text: Mosquito!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4b8d7b006384d455f9c60c7f0362e027, type: 2}
   m_sharedMaterial: {fileID: 4518713308300242389, guid: 4b8d7b006384d455f9c60c7f0362e027, type: 2}
@@ -2286,9 +2286,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'COMING SOON
-
-    HUMAN'
+  m_text: COMING SOON
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
