@@ -9,6 +9,7 @@ namespace Mosquito.Character
         None,
         Idle,
         Attack,
+        Suprise,
         // 경계 + 탐색
         boundary,
         // 반응

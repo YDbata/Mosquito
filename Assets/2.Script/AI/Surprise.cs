@@ -1,3 +1,4 @@
+using Mosquito.Character;
 using UnityEngine;
 
 namespace Mosquito.AI
@@ -14,6 +15,7 @@ namespace Mosquito.AI
             if (blackboard.controller.isHit)
             {
                 Debug.Log("Surprise Seccese!");
+                blackboard.animator.SetInteger(AnimationStrings.State, (int)State.Suprise);
                 blackboard.controller.isHit = false;
                 return Result.Success;
             }

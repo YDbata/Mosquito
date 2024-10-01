@@ -1754,7 +1754,7 @@ MonoBehaviour:
     NearClipPlane: 0.01
     FarClipPlane: 5
     Dutch: 0
-    ModeOverride: 0
+    ModeOverride: 2
     LensShift: {x: 0, y: 0}
     GateFit: 2
     FocusDistance: 10
@@ -2879,8 +2879,8 @@ MonoBehaviour:
     m_InputAxisName: Mouse Y
     m_InputAxisValue: 0
     m_InvertInput: 1
-    m_MinValue: -100
-    m_MaxValue: 100
+    m_MinValue: -30
+    m_MaxValue: 30
     m_Wrap: 0
     m_Recentering:
       m_enabled: 0
@@ -2937,7 +2937,7 @@ MonoBehaviour:
   m_LookaheadIgnoreY: 0
   m_XDamping: 1
   m_YDamping: 1
-  m_ZDamping: 1
+  m_ZDamping: 0
   m_TargetMovementOnly: 1
   m_ScreenX: 0.5
   m_ScreenY: 0.5
@@ -11940,6 +11940,10 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 3039565452
       objectReference: {fileID: 0}
+    - target: {fileID: 3657171998138055886, guid: 132e2c5432a4a4bb9bddda8a4d60de97, type: 3}
+      propertyPath: m_Data.m_SourceObjects.m_Item0.transform
+      value: 
+      objectReference: {fileID: 1090991320}
     - target: {fileID: 3858279339469270009, guid: 132e2c5432a4a4bb9bddda8a4d60de97, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.354
@@ -11989,6 +11993,10 @@ PrefabInstance:
         'mixamorig:Neck'\n\tTransform 'mixamorig:Head'\n\tTransform 'mixamorig:RightHand'\n\tTransform
         'mixamorig:RightShoulder'\n\tTransform 'mixamorig:RightForeArm'\n\tTransform
         'mixamorig:Neck'\n\tand more ..."
+      objectReference: {fileID: 0}
+    - target: {fileID: 8727521106709408857, guid: 132e2c5432a4a4bb9bddda8a4d60de97, type: 3}
+      propertyPath: m_Weight
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

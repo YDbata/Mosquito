@@ -34,26 +34,35 @@ namespace Mosquito.Character
         private void Start()
         {
             tree = gameObject.AddComponent<Tree>();
-            tree.StartBuild().Selector("Selector").Sequence("Attack").IsAttackRange(attackRadius, angle, targetMask)
-                .Attack();
-
+            tree.StartBuild().Selector("Selector").Sequence("Suprise").Suprise();
+                
+            //.IsAttackRange(attackRadius, angle, targetMask)
+            //.Attack();
+            
+            #region AttackSquence
+        
+            ((Selector)tree.root.child).children.Add(new Sequence(tree, "Attack"));
+            ((Sequence)((Selector)tree.root.child).children[1])
+                .children.Add(new IsAttackRange(tree, attackRadius, angle, targetMask));
+            ((Sequence)((Selector)tree.root.child).children[1])
+                .children.Add(new Attack(tree));
+            #endregion
+                
             #region SeekSequence
-            
+        
             ((Selector)tree.root.child).children.Add(new Sequence(tree, "Seek"));
-            ((Sequence)((Selector)tree.root.child).children[1])
-                .children.Add(new EyeDetectionObject(tree, radius, angle, targetMask));
-            ((Sequence)((Selector)tree.root.child).children[1])
-                .children.Add(new Seek(tree, seekDistanceLimit, animator));
-            
-            #endregion
-            
-            #region SurpriseSquence
-            
-            ((Selector)tree.root.child).children.Add(new Sequence(tree, "Surprise"));
             ((Sequence)((Selector)tree.root.child).children[2])
-                .children.Add(new Surprise(tree));
+                .children.Add(new EyeDetectionObject(tree, radius, angle, targetMask));
+            ((Sequence)((Selector)tree.root.child).children[2])
+                .children.Add(new Seek(tree, seekDistanceLimit, animator));
+        
+            #endregion    
             
-            #endregion
+            
+            
+            
+            
+            
         }
 
         // override void Update()
@@ -108,7 +117,7 @@ namespace Mosquito.Character
             //모기의 공격과 부딪혀 들어온 충격에 대해서는 Hit처리를 진행한다.
             // 1. 부딪힌 collider가 Attack의 레이어번호와 맞는지 확인하기
             // 2. Surprise Tree에 결과 전달 및 물린 위치 받아서 기억하기
-            Debug.Log(other.gameObject.layer + "numm");
+            //Debug.Log(other.gameObject.layer + "numm");
             if (other.gameObject.layer == 9)
             {
                 Debug.Log("HitHit");

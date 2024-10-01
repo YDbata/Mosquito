@@ -147,6 +147,14 @@ namespace Mosquito.AI
             _current = _composites.Count > 0 ? _composites.Peek() : null;
             return this;
         }
+        
+        public Tree Suprise()
+        {
+            Node suprise = new Surprise(this);
+            Attach(_current, suprise);
+            _current = _composites.Count > 0 ? _composites.Peek() : null;
+            return this;
+        }
 
         #endregion
     }

@@ -37,7 +37,7 @@ namespace Mosquito.AI
                 {
                     blackboard.agent.isStopped = false;
                     blackboard.agent.SetDestination(hit.position);
-                    _animator.SetInteger("State", 3);
+                    _animator.SetInteger("State", 4);
                     return Result.Running;
                 }
             }

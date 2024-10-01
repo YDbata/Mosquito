@@ -1,3 +1,4 @@
+using Mosquito.Character;
 using UnityEngine;
 
 namespace Mosquito.AI
@@ -18,6 +19,10 @@ namespace Mosquito.AI
 
         public override Result Invoke()
         {
+            if (blackboard.animator.GetInteger(AnimationStrings.State) == (int)State.Suprise)
+            {
+                return Result.Failure;
+            }
             Collider[] cols =
                 Physics.OverlapCapsule(blackboard.transform.position,
                     blackboard.transform.position + new Vector3(0,1,0),
@@ -28,11 +33,13 @@ namespace Mosquito.AI
                 if (IsInSight(cols[0].transform.position))
                 {
                     blackboard.target = cols[0].transform;
-                    Debug.Log("Detection");
+                    //Debug.Log("Detection");
+                    blackboard.animator.SetLayerWeight(1, 0f);
                     return Result.Success;
                 }
             }
-
+            Debug.Log("layer weight ch");
+            blackboard.animator.SetLayerWeight(1, 1f);
             return Result.Failure;
         }
         
