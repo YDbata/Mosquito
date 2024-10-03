@@ -6,6 +6,7 @@ using Cinemachine.Utility;
 using Mosquito.CommonSystem;
 using Mosquito.Script;
 using Mosquito.Stat;
+using Mosquito.UI;
 using Mosquito.Utils;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -13,6 +14,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
 using Cursor = UnityEngine.Cursor;
+using UnityEngine.Localization;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class MosquitoController : MonoBehaviour
 {
@@ -51,6 +54,8 @@ public class MosquitoController : MonoBehaviour
     [Header("Camera")] [SerializeField] private GameObject basicCamera;
     [SerializeField] private GameObject focusingCamera;
     private bool isBasicCamera = true;
+
+    private LocalizedString LocalizadString; 
 
     
     
@@ -182,18 +187,19 @@ public class MosquitoController : MonoBehaviour
         
         if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
         {
-            velocity *= fastSpeed;
-            StaminaUpdate += StaminaDecrease*Time.deltaTime;
-            //강공격
-            if (Input.GetMouseButtonDown(0) && !isRest)
+            if (stamina.value > 0)
             {
-                // 강공
-                velocity = new Vector3(0f, 0f, 0f);
-                animator.SetTrigger(AnimationStrings.SAttack);
-                StaminaUpdate += 10f;
+                velocity *= fastSpeed;
+                StaminaUpdate += StaminaDecrease * Time.deltaTime;
             }
-        }//공격
-        else if (Input.GetMouseButtonDown(0) && !isRest)
+            else
+            {
+                TextChange.isStaminaAlert = true;
+            }
+        }
+        
+        //공격
+        if (Input.GetMouseButtonDown(0) && !isRest)
         {
             // 기본 공격
             velocity = new Vector3(0f, 0f, 0f);
@@ -206,9 +212,20 @@ public class MosquitoController : MonoBehaviour
             velocity *= speed;
         }
         
-        // 카메라 둘러보기
-        if (Input.GetMouseButtonDown(1))
+        // 강공격
+        if (Input.GetMouseButtonDown(1) && !isRest)
         {
+            if (stamina.value > 0)
+            {
+                // 강공
+                velocity = new Vector3(0f, 0f, 0f);
+                animator.SetTrigger(AnimationStrings.SAttack);
+                StaminaUpdate += 10f;
+            }
+            else
+            {
+                TextChange.isStaminaAlert = true;
+            }
             
         }
         

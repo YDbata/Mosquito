@@ -64,16 +64,6 @@ namespace Mosquito.Character
             
             
         }
-
-        // override void Update()
-        // {
-        //     if (_isSit)
-        //     {
-        //         hips.position = sittingPoint.position;
-        //         hips.position -= new Vector3(0, sitheight,0);
-        //         transform.position = hips.position;
-        //     }
-        // }
         
         
         private void OnDrawGizmos()

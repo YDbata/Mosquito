@@ -187,8 +187,8 @@ ModelImporter:
     - boneName: mixamorig:Neck
       humanName: Neck
       limit:
-        min: {x: -60, y: -40, z: -40}
-        max: {x: 60, y: 40, z: 40}
+        min: {x: -60, y: -30, z: -40}
+        max: {x: 60, y: 30, z: 40}
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 1
