@@ -1,6 +1,7 @@
 using System;
 using Mosquito.AI;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 using Tree = Mosquito.AI.Tree;
 
 namespace Mosquito.Character
@@ -29,15 +30,20 @@ namespace Mosquito.Character
         [SerializeField] private LayerMask targetMask;
         [SerializeField] private float attackRadius = 0.7f;
         [SerializeField] private float seekDistanceLimit = 1.5f;
-        public bool isHit = false;
+        [SerializeField] private Rig headRig; 
 
+        [Header("Patrol wayPoint")] [SerializeField]
+        private Transform[] wayPoints;
+        [SerializeField]float walkingPointRadius = 2f;
+        
         private void Start()
         {
             tree = gameObject.AddComponent<Tree>();
-            tree.StartBuild().Selector("Selector").Sequence("Suprise").Suprise();
+            tree.StartBuild().Selector("Selector").Sequence("Suprise").IsState(State.Suprise).child = new Surprise(tree);
                 
             //.IsAttackRange(attackRadius, angle, targetMask)
             //.Attack();
+
             
             #region AttackSquence
         
@@ -47,16 +53,29 @@ namespace Mosquito.Character
             ((Sequence)((Selector)tree.root.child).children[1])
                 .children.Add(new Attack(tree));
             #endregion
-                
+            
             #region SeekSequence
         
             ((Selector)tree.root.child).children.Add(new Sequence(tree, "Seek"));
             ((Sequence)((Selector)tree.root.child).children[2])
                 .children.Add(new EyeDetectionObject(tree, radius, angle, targetMask));
             ((Sequence)((Selector)tree.root.child).children[2])
-                .children.Add(new Seek(tree, seekDistanceLimit, animator));
+                .children.Add(new Seek(tree, seekDistanceLimit, headRig));
         
-            #endregion    
+            #endregion 
+            
+            #region Idle(Patrol)
+
+            ((Selector)tree.root.child).children.Add(new Sequence(tree, "Idle"));
+            ((Sequence)((Selector)tree.root.child).children[3])
+                .children.Add(new IsState(tree, State.Idle));
+            ((IDecoration)((Sequence)((Selector)tree.root.child).children[3]).children[0]).child = new Patrol(tree, wayPoints, walkingPointRadius);
+            #endregion
+            
+            
+            
+                
+               
             
             
             
@@ -111,7 +130,7 @@ namespace Mosquito.Character
             if (other.gameObject.layer == 9)
             {
                 Debug.Log("HitHit");
-                isHit = true;
+                ChangeState(State.Suprise);
             }
         }
     }

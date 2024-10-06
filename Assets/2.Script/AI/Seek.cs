@@ -1,17 +1,19 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Animations.Rigging;
 
 namespace Mosquito.AI
 {
     public class Seek : Node
     {
         private float _distanceLimit;
-        private Animator _animator;
+        private Rig headRig;
         
-        public Seek(Tree tree, float distanceLimit, Animator animator) : base(tree)
+        public Seek(Tree tree, float distanceLimit, Rig headRig) : base(tree)
         {
-            _animator = animator;
+            
             _distanceLimit = distanceLimit;
+            this.headRig = headRig;
         }
 
         public override Result Invoke()
@@ -22,8 +24,9 @@ namespace Mosquito.AI
             if (blackboard.agent.stoppingDistance >= distance_target)
             {
                 //blackboard.transform.LookAt(blackboard.target);
-                _animator.SetInteger("State", 1);
-                Debug.Log("Success");
+                blackboard.animator.SetFloat(AnimationStrings.Velocity, 0f);
+                headRig.weight = Mathf.Lerp(headRig.weight, 1.00f, 1 * Time.deltaTime);
+                Debug.Log("Success Look");
                 return Result.Success;
             }
             
@@ -35,16 +38,21 @@ namespace Mosquito.AI
                         2.0f,
                         NavMesh.AllAreas))
                 {
+                    
                     blackboard.agent.isStopped = false;
                     blackboard.agent.SetDestination(hit.position);
-                    _animator.SetInteger("State", 4);
+                    blackboard.animator.SetFloat(AnimationStrings.Velocity, 1.5f);
+                    headRig.weight = Mathf.Lerp(headRig.weight, 1.00f, 1 * Time.deltaTime);
+                    //_animator.SetInteger("State", 4);
                     return Result.Running;
                 }
             }
 
             blackboard.target = null;
             blackboard.agent.isStopped = true;
-            _animator.SetInteger("State", 1);
+            blackboard.animator.SetFloat(AnimationStrings.Velocity, 0f);
+            blackboard.animator.SetInteger("State", 1);
+            headRig.weight = Mathf.Lerp(headRig.weight, 0.00f, 1 * Time.deltaTime);
             return Result.Failure;
         }
     }

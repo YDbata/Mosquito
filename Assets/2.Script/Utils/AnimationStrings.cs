@@ -15,5 +15,6 @@ public class AnimationStrings
     public static string IsAttack = "isAttack";
     public static string Suprise = "Surprise";
     public static string State = "State";
+    public static string Velocity = "velocity";
 
 }

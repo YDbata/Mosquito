@@ -7,13 +7,11 @@ namespace Mosquito.Character
     public enum State
     {
         None,
-        Idle,
-        Attack,
+        Idle, // 기본 상태(순찰)
+        Attack, // 공격
         Suprise,
         // 경계 + 탐색
-        boundary,
-        // 반응
-        reaction
+        Boundary,  // 탐색
         // 쫓다??
         // 벽 공격
     }
@@ -128,7 +126,7 @@ namespace Mosquito.Character
         public bool ChangeState(State newState)
         {
             _animator.SetInteger("state", (int)newState);
-            _animator.SetBool("isDirty", true);
+            //_animator.SetBool("isDirty", true);
             state = newState;
             return true;
         }

@@ -38,7 +38,7 @@ namespace Mosquito.AI
                     return Result.Success;
                 }
             }
-            Debug.Log("layer weight ch");
+            //Debug.Log("layer weight ch");
             blackboard.animator.SetLayerWeight(1, 1f);
             return Result.Failure;
         }

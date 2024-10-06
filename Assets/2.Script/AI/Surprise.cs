@@ -12,15 +12,12 @@ namespace Mosquito.AI
         public override Result Invoke()
         {
             //Debug.Log("Surprise Node Invoke "+ blackboard.isAttack);
-            if (blackboard.controller.isHit)
-            {
-                Debug.Log("Surprise Seccese!");
-                blackboard.animator.SetInteger(AnimationStrings.State, (int)State.Suprise);
-                blackboard.controller.isHit = false;
-                return Result.Success;
-            }
 
-            return Result.Failure;
+            Debug.Log("Surprise Seccese!");
+            blackboard.animator.SetInteger(AnimationStrings.State, (int)State.Suprise);
+            blackboard.controller.ChangeState(State.Idle);
+            return Result.Success;
+            
             //throw new System.NotImplementedException();
         }
     }

@@ -26,7 +26,7 @@ public class MosquitoController : MonoBehaviour
     [Header("Move")]
     [SerializeField] Animator animator;
     
-    [SerializeField] private float fastSpeed = 5f;
+    [SerializeField] private float fastSpeed = 10f;
     [SerializeField]private float rotationspeed = 1f;
     [SerializeField] private float accrotation = 0.5f;
     [SerializeField] private float knockback = 2f;
@@ -51,9 +51,7 @@ public class MosquitoController : MonoBehaviour
     public Stamina stamina;
     private bool IsRest = false;
 
-    [Header("Camera")] [SerializeField] private GameObject basicCamera;
-    [SerializeField] private GameObject focusingCamera;
-    private bool isBasicCamera = true;
+    
 
     private LocalizedString LocalizadString; 
 
@@ -189,6 +187,7 @@ public class MosquitoController : MonoBehaviour
         {
             if (stamina.value > 0)
             {
+                Debug.Log("fast Speed");
                 velocity *= fastSpeed;
                 StaminaUpdate += StaminaDecrease * Time.deltaTime;
             }
@@ -202,14 +201,10 @@ public class MosquitoController : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && !isRest)
         {
             // 기본 공격
-            velocity = new Vector3(0f, 0f, 0f);
+            //velocity = new Vector3(0f, 0f, 0f);
             animator.SetTrigger(AnimationStrings.Attack);
             StaminaUpdate += 5f;
 
-        }
-        else
-        {
-            velocity *= speed;
         }
         
         // 강공격
@@ -218,7 +213,7 @@ public class MosquitoController : MonoBehaviour
             if (stamina.value > 0)
             {
                 // 강공
-                velocity = new Vector3(0f, 0f, 0f);
+                //velocity = new Vector3(0f, 0f, 0f);
                 animator.SetTrigger(AnimationStrings.SAttack);
                 StaminaUpdate += 10f;
             }
@@ -294,18 +289,6 @@ public class MosquitoController : MonoBehaviour
         stamina.value -= StaminaUpdate;
         StaminaUpdate = 0;
         
-
-        #endregion
-
-        #region CameraChange
-
-        if (Input.GetKeyDown(KeyCode.LeftAlt))
-        {
-            basicCamera.SetActive(!isBasicCamera);
-            focusingCamera.SetActive(isBasicCamera);
-
-            isBasicCamera = !isBasicCamera;
-        }
 
         #endregion
 

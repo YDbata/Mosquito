@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Mosquito.Character;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 namespace Mosquito.AI
 {
@@ -132,9 +134,9 @@ namespace Mosquito.AI
             return this;
         }
 
-        public Tree Seek(float distanceLimit, Animator animator)
+        public Tree Seek(float distanceLimit, Rig headrig)
         {
-            Node seek = new Seek(this, distanceLimit, animator);
+            Node seek = new Seek(this, distanceLimit, headrig);
             Attach(_current, seek);
             _current = _composites.Count > 0 ? _composites.Peek() : null;
             return this;
@@ -148,12 +150,12 @@ namespace Mosquito.AI
             return this;
         }
         
-        public Tree Suprise()
+        public IsState IsState(State state)
         {
-            Node suprise = new Surprise(this);
+            IsState suprise = new IsState(this, state);
             Attach(_current, suprise);
             _current = _composites.Count > 0 ? _composites.Peek() : null;
-            return this;
+            return suprise;
         }
 
         #endregion

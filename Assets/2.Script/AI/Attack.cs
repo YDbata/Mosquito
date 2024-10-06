@@ -13,10 +13,11 @@ namespace Mosquito.AI
         public override Result Invoke()
         {
             //Debug.Log("Attack Node Invoke "+ blackboard.isAttack);
-            if (blackboard.isAttack)
+            if (blackboard.controller.state == State.Attack)
             {
                 blackboard.animator.SetTrigger("Attack");
                 blackboard.isAttack = false;
+                blackboard.controller.ChangeState(State.Idle);
                 return Result.Success;
             }
             else

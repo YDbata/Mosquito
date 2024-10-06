@@ -1,3 +1,4 @@
+using Mosquito.Character;
 using UnityEngine;
 
 namespace Mosquito.AI
@@ -29,15 +30,18 @@ namespace Mosquito.AI
                 if (IsInSight(blackboard.target.position))
                 {
                     blackboard.isAttack = true;
+                    blackboard.controller.ChangeState(State.Attack);
                     return Result.Success;
                 }
             }
             else
             {
                 blackboard.isAttack = false;
+                blackboard.controller.ChangeState(State.Idle);
                 return Result.Failure;
             }
             blackboard.isAttack = false;
+            blackboard.controller.ChangeState(State.Idle);
             return Result.Failure;
         }
         
