@@ -28,7 +28,8 @@ namespace Mosquito.Character
         [Header("AI")] [SerializeField] private float radius = 5f;
         [SerializeField] private float angle = 120f;
         [SerializeField] private LayerMask targetMask;
-        [SerializeField] private float attackRadius = 0.7f;
+        [SerializeField] public bool attackZoneCol = false;
+        [Header("Seek관련(agent stop Distance보다 작게)")]
         [SerializeField] private float seekDistanceLimit = 1.5f;
         [SerializeField] private Rig headRig; 
 
@@ -49,7 +50,7 @@ namespace Mosquito.Character
         
             ((Selector)tree.root.child).children.Add(new Sequence(tree, "Attack"));
             ((Sequence)((Selector)tree.root.child).children[1])
-                .children.Add(new IsAttackRange(tree, attackRadius, angle, targetMask));
+                .children.Add(new IsAttackRange(tree, angle, targetMask));
             ((Sequence)((Selector)tree.root.child).children[1])
                 .children.Add(new Attack(tree));
             #endregion
@@ -71,14 +72,6 @@ namespace Mosquito.Character
                 .children.Add(new IsState(tree, State.Idle));
             ((IDecoration)((Sequence)((Selector)tree.root.child).children[3]).children[0]).child = new Patrol(tree, wayPoints, walkingPointRadius);
             #endregion
-            
-            
-            
-                
-               
-            
-            
-            
             
             
             

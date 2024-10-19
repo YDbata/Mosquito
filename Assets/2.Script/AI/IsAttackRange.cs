@@ -5,13 +5,12 @@ namespace Mosquito.AI
 {
     public class IsAttackRange : Node
     {
-        private float radius;
+        private bool flag;
         private float angle;
         private LayerMask targetMask;
         
-        public IsAttackRange(Tree tree, float radius, float angle, LayerMask targetMask) : base(tree)
+        public IsAttackRange(Tree tree, float angle, LayerMask targetMask) : base(tree)
         {
-            this.radius = radius;
             this.angle = angle;
             this.targetMask = targetMask;
         }
@@ -22,54 +21,17 @@ namespace Mosquito.AI
             {
                 return Result.Failure;
             }
-            float distance_target = Vector2.Distance(
-                new Vector2(blackboard.target.position.x, blackboard.target.position.z),
-                new Vector2(blackboard.transform.position.x, blackboard.transform.position.z));
-            if (distance_target <= radius)
+            // AttackZone collider에 Mosquito가 있은지 00초가 지난 시점 공격 모션 실행
+            if (blackboard.controller.attackZoneCol)
             {
-                if (IsInSight(blackboard.target.position))
-                {
-                    blackboard.isAttack = true;
-                    blackboard.controller.ChangeState(State.Attack);
-                    return Result.Success;
-                }
+                
+                // TODO : coolTime 기능 구현
+                Debug.Log("Attackrange Sussece");
+                //blackboard.controller.state = State.Attack;
+                return Result.Success;
             }
-            else
-            {
-                blackboard.isAttack = false;
-                blackboard.controller.ChangeState(State.Idle);
-                return Result.Failure;
-            }
-            blackboard.isAttack = false;
-            blackboard.controller.ChangeState(State.Idle);
             return Result.Failure;
         }
-        
-        private bool IsInSight(Vector3 target)
-        {
-            Vector3 origin = blackboard.transform.position;
-            Vector3 forward = blackboard.transform.forward;
-            Vector3 lookDir = (target - (origin + new Vector3(0,target.y,0))).normalized;
-            float theta = Mathf.Acos(Vector3.Dot(forward, lookDir)) * Mathf.Rad2Deg;
-            if (theta < angle / 2.0f )
-            {
-            
-                if (Physics.Raycast(origin+new Vector3(0, target.y, 0),
-                        lookDir,
-                        out RaycastHit hit,
-                        Vector2.Distance(new Vector2(target.x, target.z), new Vector2(origin.x, origin.z)),
-                        //sssVector3.Distance(target, origin),
-                        targetMask))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-        
-        
-        
     }
     
     

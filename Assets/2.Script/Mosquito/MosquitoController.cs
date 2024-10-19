@@ -297,7 +297,7 @@ public class MosquitoController : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("IsAttack "+IsAttack);
+        //Debug.Log("IsAttack "+IsAttack);
         if (IsAttack)
         {
             attack.TryAttack(other);

@@ -21,8 +21,6 @@ namespace Mosquito.AI
         // target : 트리 안에서 판단을 위해 접근하는 주체
         public Transform target;
         
-        // 공격 가능한지 확인
-        public bool isAttack = false;
         
         public Blackboard(Tree tree)
         {

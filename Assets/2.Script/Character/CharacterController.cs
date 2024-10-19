@@ -125,7 +125,7 @@ namespace Mosquito.Character
 
         public bool ChangeState(State newState)
         {
-            _animator.SetInteger("state", (int)newState);
+            _animator.SetInteger(AnimationStrings.State, (int)newState);
             //_animator.SetBool("isDirty", true);
             state = newState;
             return true;

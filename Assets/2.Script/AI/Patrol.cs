@@ -6,7 +6,7 @@ namespace Mosquito.AI
     public class Patrol : Node
     {
         private Transform[] wayPoints;
-        private float wayPointRadius;
+        private float walkingPointRadius;
         private int currentWayPoint;
         private float walkSpeed = 1f;
         private float currentSpeed;
@@ -16,9 +16,9 @@ namespace Mosquito.AI
         public Patrol(Tree tree, Transform[] wayPoints, float walkingPointRadius) : base(tree)
         {
             this.wayPoints = wayPoints;
-            this.wayPointRadius = walkingPointRadius;
+            this.walkingPointRadius = walkingPointRadius;
             currentWayPoint = 0;
-            randomCoolTime = Random.Range(0, 10);
+            randomCoolTime = 0f;// Random.Range(0, 10);
             currentTime = 0;
             currentSpeed = walkSpeed;
         }
@@ -31,11 +31,11 @@ namespace Mosquito.AI
             
             if (wayPoints.Length == 1)
             {
-                if (Vector3.Distance(wayPoints[currentWayPoint].position, blackboard.transform.position) < wayPointRadius)
+                if (Vector3.Distance(wayPoints[currentWayPoint].position, blackboard.transform.position) < walkingPointRadius)
                 {
                     blackboard.transform.rotation = Quaternion.Lerp(blackboard.transform.rotation, 
                         wayPoints[currentWayPoint].rotation, Time.deltaTime*5);
-
+            
                     if (currentSpeed > 0.01f)
                     {
                         currentSpeed = Mathf.Lerp(currentSpeed, 0.00f, 3 * Time.deltaTime);
@@ -48,10 +48,10 @@ namespace Mosquito.AI
                     
                 }
             }else if(Vector3.Distance(wayPoints[currentWayPoint].position, blackboard.transform.position)
-                     < wayPointRadius)
-
+                     < walkingPointRadius)
+            
             {
-
+            
                 if (currentTime >= randomCoolTime)
                 {
                     currentWayPoint++;
@@ -59,16 +59,18 @@ namespace Mosquito.AI
                     {
                         currentWayPoint = 0;
                     }
-                    randomCoolTime = Random.Range(0, 10);
+                    randomCoolTime = Random.Range(0, 6);
+                    Debug.Log("randomcoolTime " + randomCoolTime);
                     currentTime = 0;
                 }
                 else
                 {
                     currentTime += Time.deltaTime;
-                    currentSpeed = 0f;
+                    currentSpeed = 0;//Mathf.Lerp(currentSpeed, 0.00f, 0.2f * Time.deltaTime);
                 }
                 
             }
+            
             blackboard.agent.SetDestination(wayPoints[currentWayPoint].position);
             if (!blackboard.agent.pathPending)
             {
