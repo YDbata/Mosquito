@@ -21,7 +21,23 @@ namespace Mosquito.AI
             {
                 return Result.Failure;
             }
-            // AttackZone collider에 Mosquito가 있은지 00초가 지난 시점 공격 모션 실행
+            // AttackZone(overlapBox)에 Mosquito가 있은지 00초가 지난 시점 공격 모션 실행
+            Collider[] cols =
+                Physics.OverlapBox(blackboard.transform.position + new Vector3(0,0.8f,-0.3f), new Vector3(0.8f, 0.7f, 0.7f), blackboard.transform.rotation, targetMask);
+            if (cols.Length > 0)
+            {
+                // foreach (var c in cols)
+                // {
+                //     if (c.gameObject.layer == 6)
+                //     {
+                blackboard.controller.attackZoneCol = true;
+                        //break;
+                //     }
+                // }
+                
+            }
+            
+
             if (blackboard.controller.attackZoneCol)
             {
                 

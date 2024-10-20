@@ -15,7 +15,7 @@ public class HumanAttackZone : MonoBehaviour
         if (other.gameObject.layer == 6 && humanController.state != State.Attack)
         {
             humanController.attackZoneCol = true;
-            //Debug.Log("AttackZone Detection");
+            Debug.Log("AttackZone Detection");
         }
     }
 }

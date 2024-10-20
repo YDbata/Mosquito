@@ -15,7 +15,7 @@ namespace Mosquito.AI
 
             Debug.Log("Surprise Seccese!");
             blackboard.animator.SetInteger(AnimationStrings.State, (int)State.Suprise);
-            blackboard.controller.ChangeState(State.Idle);
+            blackboard.controller.state = State.Idle;
             return Result.Success;
             
             //throw new System.NotImplementedException();

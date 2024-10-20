@@ -77,7 +77,18 @@ namespace Mosquito.Character
         private NetworkVariable<int> _hp = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         private NetworkVariable<int> _hpMax = new NetworkVariable<int>(100);
         public event Action<int> onHpChanged;
-        public State state;
+
+        public State state
+        {
+            get
+            {
+                return (State)_animator.GetInteger(AnimationStrings.State);
+            }
+            set
+            {
+                _animator.SetInteger(AnimationStrings.State, (int)value);
+            }
+        }
         private bool _aiOn;
         private NetworkVariable<float> _horizontal = new NetworkVariable<float>(0.0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         private NetworkVariable<float> _vertical = new NetworkVariable<float>(0.0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -122,14 +133,7 @@ namespace Mosquito.Character
                     break;
             }
         }
-
-        public bool ChangeState(State newState)
-        {
-            _animator.SetInteger(AnimationStrings.State, (int)newState);
-            //_animator.SetBool("isDirty", true);
-            state = newState;
-            return true;
-        }
+        
 
         protected virtual void Awake()
         {
@@ -153,6 +157,8 @@ namespace Mosquito.Character
         {
             if (IsOwner)
                 Move();
+            
+            
         }
 
         public bool IsGrounded()

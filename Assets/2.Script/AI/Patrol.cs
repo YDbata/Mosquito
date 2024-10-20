@@ -60,7 +60,7 @@ namespace Mosquito.AI
                         currentWayPoint = 0;
                     }
                     randomCoolTime = Random.Range(0, 6);
-                    Debug.Log("randomcoolTime " + randomCoolTime);
+                    //Debug.Log("randomcoolTime " + randomCoolTime);
                     currentTime = 0;
                 }
                 else
@@ -70,13 +70,10 @@ namespace Mosquito.AI
                 }
                 
             }
-            
+            blackboard.agent.ResetPath();
             blackboard.agent.SetDestination(wayPoints[currentWayPoint].position);
-            if (!blackboard.agent.pathPending)
-            {
-                blackboard.animator.SetFloat(AnimationStrings.Velocity, currentSpeed);
-                
-            }
+            //if (!blackboard.agent.pathPending)
+            blackboard.animator.SetFloat(AnimationStrings.Velocity, currentSpeed);
             return Result.Success;
         }
         

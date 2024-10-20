@@ -47,7 +47,7 @@ namespace Mosquito.Character
 
             
             #region AttackSquence
-        
+            
             ((Selector)tree.root.child).children.Add(new Sequence(tree, "Attack"));
             ((Sequence)((Selector)tree.root.child).children[1])
                 .children.Add(new IsAttackRange(tree, angle, targetMask));
@@ -56,17 +56,17 @@ namespace Mosquito.Character
             #endregion
             
             #region SeekSequence
-        
+            
             ((Selector)tree.root.child).children.Add(new Sequence(tree, "Seek"));
             ((Sequence)((Selector)tree.root.child).children[2])
-                .children.Add(new EyeDetectionObject(tree, radius, angle, targetMask));
+                .children.Add(new EyeDetectionObject(tree, radius, angle, targetMask, headRig));
             ((Sequence)((Selector)tree.root.child).children[2])
                 .children.Add(new Seek(tree, seekDistanceLimit, headRig));
-        
+            
             #endregion 
             
             #region Idle(Patrol)
-
+            
             ((Selector)tree.root.child).children.Add(new Sequence(tree, "Idle"));
             ((Sequence)((Selector)tree.root.child).children[3])
                 .children.Add(new IsState(tree, State.Idle));
@@ -91,6 +91,7 @@ namespace Mosquito.Character
                     Gizmos.DrawLine(transform.position, tree.blackboard.target.position);
                 }
             }
+            Gizmos.DrawWireCube(transform.position + new Vector3(0,0.8f,0) + Vector3.forward*-0.3f, new Vector3(0.8f, 0.7f, 0.7f));
         }
         
         private void DrawArcGizmos(float radius, float angle, Color color)
@@ -112,6 +113,8 @@ namespace Mosquito.Character
             }
             Gizmos.DrawLine(transform.position, transform.position + left * radius);
             Gizmos.DrawLine(transform.position, transform.position + right * radius);
+
+            
         }
 
         private void OnTriggerEnter(Collider other)
@@ -123,7 +126,7 @@ namespace Mosquito.Character
             if (other.gameObject.layer == 9)
             {
                 Debug.Log("HitHit");
-                ChangeState(State.Suprise);
+                state = State.Suprise;
             }
         }
     }

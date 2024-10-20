@@ -15,7 +15,7 @@ namespace Mosquito.AI
             Debug.Log("Attack Node Invoke ");
             if (blackboard.controller.attackZoneCol)
             {
-                blackboard.controller.ChangeState(State.Attack);
+                blackboard.controller.state = State.Attack;
                 //blackboard.animator.SetTrigger("Attack");
                 //blackboard.isAttack = false;
                 //blackboard.controller.ChangeState(State.Idle);
